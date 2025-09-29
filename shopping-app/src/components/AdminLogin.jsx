@@ -1,45 +1,91 @@
-import { useState } from 'react';
-import { toast } from 'react-toastify';
-import '../styles/AdminLogin.css';
-import {Link} from 'react-router-dom';
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import "../styles/AdminLogin.css";
 
 function AdminLogin() {
-  let [email, setEmail] = useState("")
-  let [pwd, setPwd] = useState("")
+  let [email, setEmail] = useState("");
+  let [pwd, setPwd] = useState("");
+  let [rememberMe, setRememberMe] = useState(false);
+
+  useEffect(() => {
+    const rememberedEmail = localStorage.getItem('rememberedUser');
+    if (rememberedEmail) {
+      setEmail(rememberedEmail);
+      setRememberMe(true);
+    }
+  }, []);
 
   function val_login(e) {
     e.preventDefault();
-    if (email === "admin" && pwd === "admin") {
-      toast.success("Login Successfull")
-    } else {
-      toast.error("Login Failed")
-    }
+    axios.get("http://localhost:1000/Admins")
+      .then((res) => {
+        const adminUser = res.data.find(user => user.email === email || user.U_name === email);
+        if (adminUser) {
+          if (adminUser.password === pwd) {
+            toast.success("Login Successfull");
+            if (rememberMe) {
+              localStorage.setItem('rememberedUser', email);
+            } else {
+              localStorage.removeItem('rememberedUser');
+            }
+          } else {
+            toast.error("Invalid password.");
+          }
+        } else {
+          toast.error("No admin found with that email.");
+        }
+      })
+      .catch((err) => {
+        toast.error("Login failed. Could not connect to the server.");
+        console.log(err);
+      })
+      .finally(() => {
+        setEmail("");
+        setPwd("");
+      });
   }
   return (
-    <div className='wrapper'>
+    <div className="wrapper">
       <form onSubmit={val_login}>
         <h2>Admin-Login</h2>
-        <div className='input-field'>
-          <input value={email} onChange={(e) => { setEmail(e.target.value) }} type="text" placeholder='Enter Email' required />
+        <div className="input-field">
+          <input
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+            type="text"
+            placeholder="Enter User Name or Email"
+            required
+          />
         </div>
-        <div className='input-field'>
-          <input value={pwd} onChange={(e) => { setPwd(e.target.value) }} type="password" placeholder='Enter Password' required />
+        <div className="input-field">
+          <input
+            value={pwd}
+            onChange={(e) => {
+              setPwd(e.target.value);
+            }}
+            type="password"
+            placeholder="Enter Password"
+            required
+          />
         </div>
-        <div className='forget'>
+        <div className="forget">
           <label htmlFor="remember">
-            <input type="checkbox" id='remember' />
+            <input type="checkbox" id="remember" checked={rememberMe} onChange={(e) => setRememberMe(e.target.checked)} />
             <p>Remember Me</p>
           </label>
-          <a href="#">Forgot password?</a>
+          <Link to="/admin-forgot-pass">Forgot password?</Link>
         </div>
         <button>Login</button>
-        <div className='register'>
+        <div className="register">
           <Link to="/admin-sign">New Admin ? Register</Link>
         </div>
-
       </form>
     </div>
-  )
+  );
 }
 
-export default AdminLogin
+export default AdminLogin;

@@ -15,6 +15,7 @@ body {
   width: 100%;
   padding: 0 10px;
   position: relative;
+  /* fix: allow ::before to cover body */
   overflow: hidden;
 }
 
@@ -29,7 +30,7 @@ body::before {
   z-index: 0;
 }
 
-.AdminSign {
+.wrapper {
   width: 400px;
   border-radius: 8px;
   padding: 30px;
@@ -38,7 +39,8 @@ body::before {
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   position: relative;
-  z-index: 1; /* fix: keeps wrapper above background */
+  z-index: 1;
+  /* fix: keeps wrapper above background */
 }
 
 form {
@@ -81,8 +83,8 @@ h2 {
 }
 
 /* fix: floating label when input has text */
-.input-field input:focus ~ label,
-.input-field input:not(:placeholder-shown) ~ label {
+.input-field input:focus~label,
+.input-field input:not(:placeholder-shown)~label {
   font-size: 0.8rem;
   top: 10px;
   transform: translateY(-120%);
@@ -110,12 +112,12 @@ h2 {
   margin-left: 8px;
 }
 
-.AdminSign a {
+.wrapper a {
   color: #efefef;
   text-decoration: none;
 }
 
-.AdminSign a:hover {
+.wrapper a:hover {
   text-decoration: underline;
 }
 
@@ -144,3 +146,18 @@ button:hover {
   color: #fff;
   font-size: 14px;
 }
+
+/* .back-to-login {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.back-to-login a {
+  color: #efefef;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.back-to-login a:hover {
+  text-decoration: underline;
+} */

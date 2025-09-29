@@ -1,3 +1,31 @@
 {
-    "Admins": []
+  "Admins": [
+    {
+      "id": "61b6",
+      "U_name": "abcd",
+      "email": "abcd@gmail.com",
+      "password": "12345",
+      "re_password": "12345",
+      "phone": "462173846",
+      "age": "51"
+    },
+    {
+      "id": "3a09",
+      "U_name": "admin",
+      "email": "admin@gmail.com",
+      "password": "admin",
+      "re_password": "admin",
+      "phone": "187623687123",
+      "age": "23"
+    },
+    {
+      "id": "f165",
+      "U_name": "rohit",
+      "email": "rohit@gmail.com",
+      "password": "12345",
+      "re_password": "12345",
+      "phone": "9693376562",
+      "age": "23"
+    }
+  ]
 }
