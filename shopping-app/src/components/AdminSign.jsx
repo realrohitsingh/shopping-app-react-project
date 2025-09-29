@@ -27,14 +27,6 @@ function AdminSign() {
         axios.post("http://localhost:1000/Admins", Admin).then((res) => {
             console.log(res);
             toast.success("Registerd Successfull");
-        });
-        SetAdmin({
-            U_name: "",
-            email: "",
-            password: "",
-            re_password: "",
-            phone: "",
-            age: "",
         }).catch((res) => {
             console.log(res);
             toast.error("Invalid Credentials");
@@ -108,7 +100,7 @@ function AdminSign() {
                 <button>Register</button>
 
                 <div className="register">
-                    <Link to="/admin-login">Already have an account? ← LogIn</Link>
+                    <Link to="/admin-login">Already have an account? ←← LogIn</Link>
                 </div>
             </form>
         </div>
