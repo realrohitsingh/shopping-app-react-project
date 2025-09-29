@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import '../styles/AdminLogin.css';
-
+import {Link} from 'react-router-dom';
 
 function AdminLogin() {
   let [email, setEmail] = useState("")
@@ -34,8 +34,9 @@ function AdminLogin() {
         </div>
         <button>Login</button>
         <div className='register'>
-          <p>Don't have an account? <a href="#">Register</a></p>
+          <Link to="/admin-sign">New Admin ? Register</Link>
         </div>
+
       </form>
     </div>
   )

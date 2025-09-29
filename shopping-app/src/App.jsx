@@ -4,6 +4,7 @@ import AdminLogin from './components/AdminLogin'
 import LandingPage from './components/LandingPage'
 import UserLogin from './components/UserLogin'
 import {ToastContainer} from 'react-toastify'
+import AdminSign from './components/AdminSign'
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
           <Route path='/' element={<LandingPage/>} />
           <Route path='/admin-login' element={<AdminLogin />} />
           <Route path='/user-login' element={<UserLogin />} />
+          <Route path='/admin-sign' element={<AdminSign/>} />
         </Routes>
       </BrowserRouter>
       <ToastContainer/>
