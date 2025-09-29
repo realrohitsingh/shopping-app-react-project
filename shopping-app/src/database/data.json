@@ -17,24 +17,6 @@
       "re_password": "admin",
       "phone": "187623687123",
       "age": "23"
-    },
-    {
-      "id": "f165",
-      "U_name": "rohit",
-      "email": "rohit@gmail.com",
-      "password": "12345",
-      "re_password": "12345",
-      "phone": "9693376562",
-      "age": "23"
-    },
-    {
-      "id": "2ec5",
-      "U_name": "raj",
-      "email": "raj@gmail.com",
-      "password": "12345",
-      "re_password": "12345",
-      "phone": "71682365",
-      "age": "23"
     }
   ]
 }

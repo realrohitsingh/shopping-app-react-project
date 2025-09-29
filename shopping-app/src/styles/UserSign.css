@@ -15,6 +15,7 @@ body {
   width: 100%;
   padding: 0 10px;
   position: relative;
+  /* fix: allow ::before to cover body */
   overflow: hidden;
 }
 
@@ -37,33 +38,9 @@ body::before {
   border: 1px solid rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  position: relative; /* This is the positioning context */
+  position: relative;
   z-index: 1;
-}
-
-.back-btn {
-  position: absolute;
-  top: 15px;
-  left: 20px;
-
-  /* Style for a clean arrow button */
-  background: transparent !important;
-  border: none !important;
-  color: #fff !important;
-  font-size: 2.5rem; /* Slightly adjusted size for a clean look */
-  font-weight: 600; /* Keeps it bold */
-  padding: 5px; /* Adds a small clickable area without being visible */
-
-  cursor: pointer;
-  line-height: 1;
-  z-index: 10;
-  transition: all 0.2s ease-in-out;
-}
-
-.back-btn:hover {
-  /* Simple hover effect */
-  color: #ccc !important; /* Slightly dims the arrow */
-  transform: translateX(-3px); /* Moves it slightly to the left */
+  /* fix: keeps wrapper above background */
 }
 
 form {
@@ -73,15 +50,25 @@ form {
 
 h2 {
   font-size: 2rem;
-  color: #fff;
-  margin: 0;
   margin-bottom: 20px;
+  color: #fff;
 }
 
 .input-field {
   position: relative;
   border-bottom: 2px solid #ccc;
   margin: 15px 0;
+}
+
+.input-field label {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  color: #fff;
+  font-size: 16px;
+  pointer-events: none;
+  transition: 0.2s ease;
 }
 
 .input-field input {
@@ -93,6 +80,14 @@ h2 {
   font-size: 16px;
   color: #fff;
   padding: 0 5px;
+}
+
+/* fix: floating label when input has text */
+.input-field input:focus~label,
+.input-field input:not(:placeholder-shown)~label {
+  font-size: 0.8rem;
+  top: 10px;
+  transform: translateY(-120%);
 }
 
 .forget {

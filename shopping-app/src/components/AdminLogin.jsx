@@ -1,34 +1,42 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "../styles/AdminLogin.css";
 
 function AdminLogin() {
+  const navigate = useNavigate();
   let [email, setEmail] = useState("");
   let [pwd, setPwd] = useState("");
   let [rememberMe, setRememberMe] = useState(false);
 
   useEffect(() => {
-    const rememberedEmail = localStorage.getItem('rememberedUser');
+    const rememberedEmail = localStorage.getItem("rememberedUser");
     if (rememberedEmail) {
       setEmail(rememberedEmail);
       setRememberMe(true);
     }
   }, []);
 
+  const handleBack = () => {
+    navigate('/');
+  };
+
   function val_login(e) {
     e.preventDefault();
-    axios.get("http://localhost:1000/Admins")
+    axios
+      .get("http://localhost:1000/Admins")
       .then((res) => {
-        const adminUser = res.data.find(user => user.email === email || user.U_name === email);
+        const adminUser = res.data.find(
+          (user) => user.email === email || user.U_name === email
+        );
         if (adminUser) {
           if (adminUser.password === pwd) {
             toast.success("Login Successfull");
             if (rememberMe) {
-              localStorage.setItem('rememberedUser', email);
+              localStorage.setItem("rememberedUser", email);
             } else {
-              localStorage.removeItem('rememberedUser');
+              localStorage.removeItem("rememberedUser");
             }
           } else {
             toast.error("Invalid password.");
@@ -48,8 +56,13 @@ function AdminLogin() {
   }
   return (
     <div className="wrapper">
+      <button type="button" className="back-btn" onClick={handleBack}>
+        &larr;
+      </button>
       <form onSubmit={val_login}>
-        <h2>Admin-Login</h2>
+        <div className="form-header">
+          <h2>Admin-Login</h2>
+        </div>
         <div className="input-field">
           <input
             value={email}
@@ -74,7 +87,12 @@ function AdminLogin() {
         </div>
         <div className="forget">
           <label htmlFor="remember">
-            <input type="checkbox" id="remember" checked={rememberMe} onChange={(e) => setRememberMe(e.target.checked)} />
+            <input
+              type="checkbox"
+              id="remember"
+              checked={rememberMe}
+              onChange={(e) => setRememberMe(e.target.checked)}
+            />
             <p>Remember Me</p>
           </label>
           <Link to="/admin-forgot-pass">Forgot password?</Link>

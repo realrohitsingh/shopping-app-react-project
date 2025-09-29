@@ -1,0 +1,22 @@
+{
+  "user": [
+    {
+      "id": "9ff9",
+      "U_name": "rohit",
+      "email": "rohitsingh123@gmail.com",
+      "password": "singh",
+      "re_password": "singh",
+      "phone": "9693376562",
+      "age": "23"
+    },
+    {
+      "id": "d7eb",
+      "U_name": "raj",
+      "email": "raj@gmail.com",
+      "password": "raj",
+      "re_password": "raj",
+      "phone": "19823798123",
+      "age": "23"
+    }
+  ]
+}
