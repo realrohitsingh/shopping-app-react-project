@@ -13,15 +13,20 @@ import UserSign from "./components/UserSign";
 function App() {
   return (
     <div className="relative min-h-screen w-full overflow-x-hidden font-sans">
-      {/* New Cursor-inspired background */}
-      <div className="fixed inset-0 -z-10 bg-black">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.05)_0,_rgba(255,255,255,0)_15%)]" />
+      {/* Cursor.com inspired background */}
+      <div className="fixed inset-0 -z-10 bg-background">
+        {/* Large gradient orbs for depth */}
+        <div className="absolute top-0 -left-40 w-[600px] h-[600px] bg-primary/30 rounded-full blur-[120px] animate-pulse" />
+        <div className="absolute bottom-0 -right-40 w-[600px] h-[600px] bg-accent/30 rounded-full blur-[120px] animate-pulse"
+          style={{ animationDelay: '1s', animationDuration: '3s' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-purple-500/20 rounded-full blur-[100px]" />
+
+        {/* Subtle grid pattern */}
         <div
-          className="absolute top-0 left-0 h-full w-full bg-repeat"
+          className="absolute inset-0 opacity-[0.15]"
           style={{
-            backgroundImage: `linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-            backgroundSize: '30px 30px',
-            maskImage: 'radial-gradient(ellipse 80% 50% at 50% 0%, black, transparent 70%)',
+            backgroundImage: `linear-gradient(to right, rgba(139,92,246,0.15) 1px, transparent 1px), linear-gradient(to bottom, rgba(139,92,246,0.15) 1px, transparent 1px)`,
+            backgroundSize: '48px 48px',
           }}
         />
       </div>

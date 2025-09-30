@@ -1,18 +1,21 @@
 import axios from "axios";
 import { useState } from "react";
 import {
+  FaArrowLeft,
   FaBirthdayCake,
   FaEnvelope,
   FaLock,
   FaPhone,
+  FaShieldAlt,
   FaUser,
   FaUserPlus,
 } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 function AdminSign() {
-  let [Admin, SetAdmin] = useState({
+  const navigate = useNavigate();
+  const [admin, setAdmin] = useState({
     U_name: "",
     email: "",
     password: "",
@@ -21,9 +24,13 @@ function AdminSign() {
     age: "",
   });
 
+  const handleBack = () => {
+    navigate("/admin-login");
+  };
+
   function handleChange(e) {
-    let { name, value } = e.target;
-    SetAdmin((prevState) => ({
+    const { name, value } = e.target;
+    setAdmin((prevState) => ({
       ...prevState,
       [name]: value,
     }));
@@ -31,162 +38,206 @@ function AdminSign() {
 
   function register_admin(e) {
     e.preventDefault();
+
+    // Validate password match
+    if (admin.password !== admin.re_password) {
+      toast.error("Passwords do not match!");
+      return;
+    }
+
     axios
-      .post("http://localhost:1000/Admins", Admin)
+      .post("http://localhost:1000/Admins", admin)
       .then((res) => {
         console.log(res);
-        toast.success("Registerd Successfull");
+        toast.success("Registration Successful! You can now login.");
+        navigate("/admin-login");
       })
-      .catch((res) => {
-        console.log(res);
-        toast.error("Invalid Credentials");
+      .catch((err) => {
+        console.log(err);
+        toast.error("Registration failed. Please try again.");
       });
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center font-sans">
-      <div className="relative w-full max-w-md p-8 sm:p-10 rounded-2xl bg-white/10 border border-white/20 backdrop-blur-2xl shadow-2xl ring-1 ring-white/10">
-        <form
-          action=""
-          onSubmit={register_admin}
-          className="space-y-7 relative z-10">
-          <h2 className="text-3xl font-extrabold text-white text-center mb-2 tracking-tight flex items-center justify-center gap-2">
-            <FaUserPlus className="text-primary" /> Admin Sign-up
-          </h2>
-          <p className="text-center text-sm text-muted mb-4">
-            Create an admin account
-          </p>
-          <div className="space-y-2">
-            <label
-              className="block text-muted font-medium"
-              htmlFor="admin-sign-username">
-              Name
-            </label>
-            <div className="relative">
-              <input
-                id="admin-sign-username"
-                className="input-glass pl-10"
-                type="text"
-                name="U_name"
-                value={Admin.U_name}
-                onChange={handleChange}
-                placeholder="Enter name of Admin"
-                required
-              />
-              <FaUser className="absolute left-3 top-1/2 -translate-y-1/2 text-primary/60" />
+    <div className="min-h-screen flex items-center justify-center font-sans px-4 py-12">
+      <div className="relative w-full max-w-md">
+        {/* Back Button */}
+        <button
+          type="button"
+          className="absolute -top-12 left-0 flex items-center gap-2 text-text/70 hover:text-primary transition-colors group"
+          onClick={handleBack}>
+          <FaArrowLeft className="group-hover:-translate-x-1 transition-transform" />
+          <span className="font-medium">Back to Login</span>
+        </button>
+
+        {/* Registration Card */}
+        <div className="glass-panel p-8 sm:p-10 animate-[scaleIn_0.5s_ease-out] max-h-[85vh] overflow-y-auto">
+          {/* Header */}
+          <div className="text-center mb-6">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-purple-600/20 border border-primary/30 mb-4">
+              <FaShieldAlt className="text-3xl text-primary" />
             </div>
+            <h2 className="text-3xl font-bold text-white mb-2">
+              SmartShop Admin Setup
+            </h2>
+            <p className="text-text/70">
+              Create your admin account to manage SmartShop
+            </p>
           </div>
-          <div className="space-y-2">
-            <label
-              className="block text-muted font-medium"
-              htmlFor="admin-sign-email">
-              Email
-            </label>
-            <div className="relative">
-              <input
-                id="admin-sign-email"
-                className="input-glass pl-10"
-                type="email"
-                name="email"
-                value={Admin.email}
-                onChange={handleChange}
-                placeholder="example@gmail.com"
-                required
-              />
-              <FaEnvelope className="absolute left-3 top-1/2 -translate-y-1/2 text-primary/60" />
+
+          {/* Form */}
+          <form onSubmit={register_admin} className="space-y-5">
+            {/* Username */}
+            <div className="space-y-2">
+              <label
+                className="block text-text/90 font-medium text-sm"
+                htmlFor="admin-sign-username">
+                Username
+              </label>
+              <div className="relative">
+                <input
+                  id="admin-sign-username"
+                  className="input-glass pl-11"
+                  type="text"
+                  name="U_name"
+                  value={admin.U_name}
+                  onChange={handleChange}
+                  placeholder="Choose a username"
+                  required
+                />
+                <FaUser className="absolute left-4 top-1/2 -translate-y-1/2 text-primary/70" />
+              </div>
             </div>
-          </div>
-          <div className="space-y-2">
-            <label
-              className="block text-muted font-medium"
-              htmlFor="admin-sign-password">
-              Password
-            </label>
-            <div className="relative">
-              <input
-                id="admin-sign-password"
-                className="input-glass pl-10"
-                type="password"
-                name="password"
-                value={Admin.password}
-                onChange={handleChange}
-                placeholder="Enter Password"
-                required
-              />
-              <FaLock className="absolute left-3 top-1/2 -translate-y-1/2 text-primary/60" />
+            {/* Email */}
+            <div className="space-y-2">
+              <label
+                className="block text-text/90 font-medium text-sm"
+                htmlFor="admin-sign-email">
+                Email Address
+              </label>
+              <div className="relative">
+                <input
+                  id="admin-sign-email"
+                  className="input-glass pl-11"
+                  type="email"
+                  name="email"
+                  value={admin.email}
+                  onChange={handleChange}
+                  placeholder="your.email@example.com"
+                  required
+                />
+                <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 text-primary/70" />
+              </div>
             </div>
-          </div>
-          <div className="space-y-2">
-            <label
-              className="block text-muted font-medium"
-              htmlFor="admin-sign-repassword">
-              Re-enter Password
-            </label>
-            <div className="relative">
-              <input
-                id="admin-sign-repassword"
-                className="input-glass pl-10"
-                type="password"
-                name="re_password"
-                value={Admin.re_password}
-                onChange={handleChange}
-                placeholder="Enter re-enter Password"
-                required
-              />
-              <FaLock className="absolute left-3 top-1/2 -translate-y-1/2 text-primary/60" />
+            {/* Password */}
+            <div className="space-y-2">
+              <label
+                className="block text-text/90 font-medium text-sm"
+                htmlFor="admin-sign-password">
+                Password
+              </label>
+              <div className="relative">
+                <input
+                  id="admin-sign-password"
+                  className="input-glass pl-11"
+                  type="password"
+                  name="password"
+                  value={admin.password}
+                  onChange={handleChange}
+                  placeholder="Create a strong password"
+                  required
+                  minLength={6}
+                />
+                <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-primary/70" />
+              </div>
             </div>
-          </div>
-          <div className="space-y-2">
-            <label
-              className="block text-muted font-medium"
-              htmlFor="admin-sign-phone">
-              Phone
-            </label>
-            <div className="relative">
-              <input
-                id="admin-sign-phone"
-                className="input-glass pl-10"
-                type="number"
-                name="phone"
-                value={Admin.phone}
-                onChange={handleChange}
-                placeholder="Enter phone of Admin"
-                required
-              />
-              <FaPhone className="absolute left-3 top-1/2 -translate-y-1/2 text-primary/60" />
+
+            {/* Confirm Password */}
+            <div className="space-y-2">
+              <label
+                className="block text-text/90 font-medium text-sm"
+                htmlFor="admin-sign-repassword">
+                Confirm Password
+              </label>
+              <div className="relative">
+                <input
+                  id="admin-sign-repassword"
+                  className="input-glass pl-11"
+                  type="password"
+                  name="re_password"
+                  value={admin.re_password}
+                  onChange={handleChange}
+                  placeholder="Confirm your password"
+                  required
+                  minLength={6}
+                />
+                <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-primary/70" />
+              </div>
             </div>
-          </div>
-          <div className="space-y-2">
-            <label
-              className="block text-muted font-medium"
-              htmlFor="admin-sign-age">
-              Age
-            </label>
-            <div className="relative">
-              <input
-                id="admin-sign-age"
-                className="input-glass pl-10"
-                type="number"
-                name="age"
-                value={Admin.age}
-                onChange={handleChange}
-                placeholder="Enter age of Admin"
-                required
-              />
-              <FaBirthdayCake className="absolute left-3 top-1/2 -translate-y-1/2 text-primary/60" />
+            {/* Phone */}
+            <div className="space-y-2">
+              <label
+                className="block text-text/90 font-medium text-sm"
+                htmlFor="admin-sign-phone">
+                Phone Number
+              </label>
+              <div className="relative">
+                <input
+                  id="admin-sign-phone"
+                  className="input-glass pl-11"
+                  type="tel"
+                  name="phone"
+                  value={admin.phone}
+                  onChange={handleChange}
+                  placeholder="Your phone number"
+                  required
+                />
+                <FaPhone className="absolute left-4 top-1/2 -translate-y-1/2 text-primary/70" />
+              </div>
             </div>
-          </div>
-          <button className="w-full btn-primary flex items-center justify-center gap-2">
-            <FaUserPlus className="text-lg" /> Register
-          </button>
-          <div className="text-center mt-4">
-            <Link
-              className="text-accent hover:underline font-medium"
-              to="/admin-login">
-              Already have an account? &larr; LogIn
-            </Link>
-          </div>
-        </form>
+
+            {/* Age */}
+            <div className="space-y-2">
+              <label
+                className="block text-text/90 font-medium text-sm"
+                htmlFor="admin-sign-age">
+                Age
+              </label>
+              <div className="relative">
+                <input
+                  id="admin-sign-age"
+                  className="input-glass pl-11"
+                  type="number"
+                  name="age"
+                  value={admin.age}
+                  onChange={handleChange}
+                  placeholder="Your age"
+                  required
+                  min="18"
+                  max="120"
+                />
+                <FaBirthdayCake className="absolute left-4 top-1/2 -translate-y-1/2 text-primary/70" />
+              </div>
+            </div>
+            {/* Submit Button */}
+            <button type="submit" className="w-full btn-primary mt-6">
+              <FaUserPlus className="text-lg" />
+              <span>Create Admin Account</span>
+            </button>
+
+            {/* Login Link */}
+            <div className="text-center pt-4 border-t border-border/50">
+              <p className="text-text/70 text-sm">
+                Already have an account?{" "}
+                <Link
+                  className="link-primary font-semibold"
+                  to="/admin-login">
+                  Sign In
+                </Link>
+              </p>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

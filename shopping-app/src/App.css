@@ -1,88 +1,42 @@
 @import "tailwindcss";
 
-/* Tailwind v4 theme tokens — Cursor Inspired */
+/* Tailwind v4 theme tokens — Cursor.com Theme */
 @theme {
-  --color-primary: #00ff41;
-  /* Cursor's vibrant green */
-  --color-accent: #00ff41;
-  /* Using green as the main accent */
-  --color-background: #000000;
-  /* Pure black background */
-  --color-card: #111111;
-  /* Off-black for cards and panels */
-  --color-border: #333333;
-  /* Dark grey for borders */
-  --color-muted: #888888;
-  /* Lighter grey for muted text */
+  --color-primary: #8b5cf6;
+  --color-accent: #06b6d4;
+  --color-success: #10b981;
+  --color-background: #0d0d0d;
+  --color-card: #1a1a1a;
+  --color-border: #2d2d2d;
+  --color-muted: #9ca3af;
+  --color-text: #f3f4f6;
 }
 
+/* Base styles */
 @layer base {
 
   html,
   body {
-    @apply antialiased bg-background text-slate-200 font-sans;
+    @apply antialiased bg-background text-text font-sans;
   }
 
   p {
-    @apply text-slate-300;
+    @apply text-text/90;
   }
 
   label {
-    @apply text-muted;
+    @apply text-text font-medium;
   }
 
   h1,
   h2,
   h3,
   h4 {
-    @apply tracking-tight text-white;
+    @apply tracking-tight text-white font-bold;
   }
 
   a {
-    @apply text-primary/90 hover:text-primary transition-colors;
-  }
-}
-
-@layer components {
-
-  /* Main action button (green) */
-  .btn-primary {
-    @apply relative inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-black bg-primary shadow-[0_0_15px_rgba(0, 255, 65, 0.3)] hover:bg-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:opacity-50 disabled:cursor-not-allowed;
-  }
-
-  .btn-primary:hover {
-    @apply bg-indigo-700 shadow-lg scale-105;
-    /* ✨ This adds the hover effect! */
-  }
-
-  /* Secondary/alternate button */
-  .btn-secondary {
-    @apply relative inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-white bg-card border border-border hover:border-white/50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:opacity-50 disabled:cursor-not-allowed;
-  }
-
-  .input-cursor {
-    @apply w-full px-4 py-2 rounded-lg bg-card text-white placeholder:text-slate-500 border border-border focus:ring-2 focus:ring-primary/80 focus:border-primary/50 focus:outline-none transition-colors;
-  }
-
-  .cursor-panel {
-    @apply relative bg-card/80 backdrop-blur-sm border border-border rounded-2xl shadow-2xl;
-  }
-
-  .card-product {
-    @apply cursor-panel p-4 border-border hover:border-primary/30 transition-all duration-300;
-  }
-
-  .card-product:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.3);
-  }
-
-  .card-title {
-    @apply mt-3 text-lg font-semibold text-white line-clamp-2;
-  }
-
-  .card-meta {
-    @apply mt-2 text-sm text-muted;
+    @apply text-primary hover:text-primary/80 transition-colors;
   }
 }
 
@@ -96,14 +50,38 @@
   }
 }
 
-@keyframes riseIn {
+@keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(6px);
+    transform: translateY(20px);
   }
 
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }

@@ -1,14 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { FaLock, FaSignInAlt, FaUser } from "react-icons/fa";
+import { FaArrowLeft, FaLock, FaShoppingBag, FaSignInAlt, FaUser } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 function UserLogin() {
   const navigate = useNavigate();
-  let [email, setEmail] = useState("");
-  let [pwd, setPwd] = useState("");
-  let [rememberMe, setRememberMe] = useState(false);
+  const [email, setEmail] = useState("");
+  const [pwd, setPwd] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
 
   useEffect(() => {
     const rememberedEmail = localStorage.getItem("rememberedUser");
@@ -27,12 +27,12 @@ function UserLogin() {
     axios
       .get("http://localhost:1001/user")
       .then((res) => {
-        const adminUser = res.data.find(
+        const foundUser = res.data.find(
           (user) => user.email === email || user.U_name === email
         );
-        if (adminUser) {
-          if (adminUser.password === pwd) {
-            toast.success("Login Successfull");
+        if (foundUser) {
+          if (foundUser.password === pwd) {
+            toast.success("Login Successful! Welcome back.");
             if (rememberMe) {
               localStorage.setItem("rememberedUser", email);
             } else {
@@ -54,94 +54,120 @@ function UserLogin() {
         setPwd("");
       });
   }
+
   return (
-    <div className="min-h-screen flex items-center justify-center font-sans">
-      <div className="relative w-full max-w-md p-8 sm:p-10 rounded-2xl bg-white/10 border border-white/20 backdrop-blur-2xl shadow-2xl ring-1 ring-white/10">
+    <div className="min-h-screen flex items-center justify-center font-sans px-4 py-12">
+      <div className="relative w-full max-w-md">
+        {/* Back Button */}
         <button
           type="button"
-          className="absolute top-4 left-4 w-10 h-10 flex items-center justify-center text-primary bg-white/40 border border-white/60 rounded-full hover:bg-primary hover:text-white transition z-10 shadow"
+          className="absolute -top-12 left-0 flex items-center gap-2 text-text/70 hover:text-accent transition-colors group"
           onClick={handleBack}>
-          &larr;
+          <FaArrowLeft className="group-hover:-translate-x-1 transition-transform" />
+          <span className="font-medium">Back to Home</span>
         </button>
-        <form onSubmit={val_login} className="space-y-7 relative z-10">
-          <h2 className="text-3xl font-extrabold text-white text-center mb-2 tracking-tight">
-            User Login
-          </h2>
-          <p className="text-center text-sm text-muted mb-4">
-            Sign in to continue shopping
-          </p>
-          <div className="space-y-2">
-            <label
-              className="block text-muted font-medium"
-              htmlFor="user-email">
-              User Name or Email
-            </label>
-            <div className="relative">
-              <input
-                id="user-email"
-                className="input-glass pl-10"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-                type="text"
-                placeholder="Enter User Name or Email"
-                required
-              />
-              <FaUser className="absolute left-3 top-1/2 -translate-y-1/2 text-primary/60" />
+
+        {/* Login Card */}
+        <div className="glass-panel p-8 sm:p-10 animate-[scaleIn_0.5s_ease-out]">
+          {/* Header */}
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-accent/20 to-cyan-600/20 border border-accent/30 mb-4">
+              <FaShoppingBag className="text-3xl text-accent" />
             </div>
+            <h2 className="text-3xl font-bold text-white mb-2">
+              Welcome to SmartShop
+            </h2>
+            <p className="text-text/70">
+              Sign in to your account
+            </p>
           </div>
-          <div className="space-y-2">
-            <label
-              className="block text-muted font-medium"
-              htmlFor="user-password">
-              Password
-            </label>
-            <div className="relative">
-              <input
-                id="user-password"
-                className="input-glass pl-10"
-                value={pwd}
-                onChange={(e) => {
-                  setPwd(e.target.value);
-                }}
-                type="password"
-                placeholder="Enter Password"
-                required
-              />
-              <FaLock className="absolute left-3 top-1/2 -translate-y-1/2 text-primary/60" />
+
+          {/* Form */}
+          <form onSubmit={val_login} className="space-y-6">
+            {/* Email/Username Input */}
+            <div className="space-y-2">
+              <label
+                className="block text-text/90 font-medium text-sm"
+                htmlFor="user-email">
+                Username or Email
+              </label>
+              <div className="relative">
+                <input
+                  id="user-email"
+                  className="input-glass pl-11"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  type="text"
+                  placeholder="Enter your username or email"
+                  required
+                />
+                <FaUser className="absolute left-4 top-1/2 -translate-y-1/2 text-accent/70" />
+              </div>
             </div>
-          </div>
-          <div className="flex items-center justify-between text-sm">
-            <label
-              htmlFor="remember"
-              className="flex items-center gap-2 cursor-pointer select-none">
-              <input
-                type="checkbox"
-                id="remember"
-                checked={rememberMe}
-                onChange={(e) => setRememberMe(e.target.checked)}
-                className="accent-primary"
-              />
-              <span className="text-muted">Remember Me</span>
-            </label>
-            <Link
-              className="text-primary hover:underline"
-              to="/user-forgot-pass">
-              Forgot password?
-            </Link>
-          </div>
-          <button className="w-full btn-primary flex items-center justify-center gap-2">
-            <FaSignInAlt className="text-lg" /> Login
-          </button>
-          <div className="text-center mt-4">
-            <Link
-              className="text-accent hover:underline font-medium"
-              to="/user-sign">
-              New User? Register
-            </Link>
-          </div>
-        </form>
+
+            {/* Password Input */}
+            <div className="space-y-2">
+              <label
+                className="block text-text/90 font-medium text-sm"
+                htmlFor="user-password">
+                Password
+              </label>
+              <div className="relative">
+                <input
+                  id="user-password"
+                  className="input-glass pl-11"
+                  value={pwd}
+                  onChange={(e) => setPwd(e.target.value)}
+                  type="password"
+                  placeholder="Enter your password"
+                  required
+                />
+                <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-accent/70" />
+              </div>
+            </div>
+
+            {/* Remember Me & Forgot Password */}
+            <div className="flex items-center justify-between text-sm">
+              <label
+                htmlFor="remember"
+                className="flex items-center gap-2 cursor-pointer select-none group">
+                <input
+                  type="checkbox"
+                  id="remember"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                  className="w-4 h-4 rounded border-border bg-card/50 text-accent focus:ring-2 focus:ring-accent/30 cursor-pointer"
+                />
+                <span className="text-text/70 group-hover:text-text transition-colors">
+                  Remember me
+                </span>
+              </label>
+              <Link
+                className="link-accent text-sm font-medium"
+                to="/user-forgot-pass">
+                Forgot password?
+              </Link>
+            </div>
+
+            {/* Login Button */}
+            <button type="submit" className="w-full btn-accent">
+              <FaSignInAlt className="text-lg" />
+              <span>Sign In</span>
+            </button>
+
+            {/* Register Link */}
+            <div className="text-center pt-4 border-t border-border/50">
+              <p className="text-text/70 text-sm">
+                Don&apos;t have an account?{" "}
+                <Link
+                  className="link-accent font-semibold"
+                  to="/user-sign">
+                  Create Account
+                </Link>
+              </p>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );
