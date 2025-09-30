@@ -42,7 +42,7 @@ function UserLogin() {
             toast.error("Invalid password.");
           }
         } else {
-          toast.error("No admin found with that email.");
+          toast.error("No user found with that email.");
         }
       })
       .catch((err) => {
@@ -56,7 +56,7 @@ function UserLogin() {
   }
   return (
     <div className="min-h-screen flex items-center justify-center font-sans">
-      <div className="glass-panel w-full max-w-md p-10 before:absolute before:inset-0 before:rounded-2xl before:bg-gradient-to-br before:from-white/40 before:to-white/10 before:pointer-events-none">
+      <div className="relative w-full max-w-md p-8 sm:p-10 rounded-2xl bg-white/10 border border-white/20 backdrop-blur-2xl shadow-2xl ring-1 ring-white/10">
         <button
           type="button"
           className="absolute top-4 left-4 w-10 h-10 flex items-center justify-center text-primary bg-white/40 border border-white/60 rounded-full hover:bg-primary hover:text-white transition z-10 shadow"
@@ -64,9 +64,12 @@ function UserLogin() {
           &larr;
         </button>
         <form onSubmit={val_login} className="space-y-7 relative z-10">
-          <h2 className="text-3xl font-extrabold text-primary text-center mb-6 drop-shadow-lg tracking-tight">
+          <h2 className="text-3xl font-extrabold text-white text-center mb-2 tracking-tight">
             User Login
           </h2>
+          <p className="text-center text-sm text-muted mb-4">
+            Sign in to continue shopping
+          </p>
           <div className="space-y-2">
             <label
               className="block text-muted font-medium"

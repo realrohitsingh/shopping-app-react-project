@@ -13,12 +13,12 @@ import UserSign from "./components/UserSign";
 function App() {
   return (
     <div className="relative min-h-screen w-full overflow-x-hidden font-sans">
-      {/* Stronger, premium background */}
+      {/* High-contrast Neon Slate background */}
       <div className="fixed inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/25 via-background to-accent/20" />
-        <div className="absolute -top-40 -left-40 h-[500px] w-[500px] rounded-full bg-primary/20 blur-3xl" />
-        <div className="absolute -bottom-40 -right-40 h-[500px] w-[500px] rounded-full bg-accent/25 blur-3xl" />
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/noise.png')] opacity-15 mix-blend-overlay pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0A0B0F] via-[#0F1220] to-[#0A0B0F]" />
+        <div className="absolute -top-36 -left-40 h-[560px] w-[560px] rounded-full bg-primary/35 blur-[80px]" />
+        <div className="absolute -bottom-40 -right-36 h-[560px] w-[560px] rounded-full bg-accent/35 blur-[80px]" />
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/noise.png')] opacity-20 mix-blend-overlay pointer-events-none" />
       </div>
       <BrowserRouter>
         <Routes>

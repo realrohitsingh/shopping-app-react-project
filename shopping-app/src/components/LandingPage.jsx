@@ -9,11 +9,9 @@ function LandingPage() {
           className="glass-panel w-80 p-10 hover:scale-105 transition-transform ring-1 ring-white/20"
           to="/admin-login">
           <div className="relative z-10 flex flex-col items-center">
-            <FaUserShield className="w-20 h-20 text-primary drop-shadow mb-4" />
-            <h1 className="text-2xl font-bold text-primary mb-2">
-              Admin Login
-            </h1>
-            <span className="text-muted text-sm">
+            <FaUserShield className="w-20 h-20 text-white drop-shadow mb-4" />
+            <h1 className="text-2xl font-bold text-white mb-2">Admin Login</h1>
+            <span className="text-white/80 text-sm">
               For store managers and admins
             </span>
           </div>
@@ -22,9 +20,9 @@ function LandingPage() {
           className="glass-panel w-80 p-10 hover:scale-105 transition-transform ring-1 ring-white/20"
           to="/user-login">
           <div className="relative z-10 flex flex-col items-center">
-            <FaUser className="w-20 h-20 text-accent drop-shadow mb-4" />
-            <h1 className="text-2xl font-bold text-accent mb-2">User Login</h1>
-            <span className="text-muted text-sm">
+            <FaUser className="w-20 h-20 text-white drop-shadow mb-4" />
+            <h1 className="text-2xl font-bold text-white mb-2">User Login</h1>
+            <span className="text-white/80 text-sm">
               For customers and shoppers
             </span>
           </div>

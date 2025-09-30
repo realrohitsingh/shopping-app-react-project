@@ -45,14 +45,17 @@ function AdminSign() {
 
   return (
     <div className="min-h-screen flex items-center justify-center font-sans">
-      <div className="glass-panel w-full max-w-md p-10 before:absolute before:inset-0 before:rounded-2xl before:bg-gradient-to-br before:from-white/40 before:to-white/10 before:pointer-events-none">
+      <div className="relative w-full max-w-md p-8 sm:p-10 rounded-2xl bg-white/10 border border-white/20 backdrop-blur-2xl shadow-2xl ring-1 ring-white/10">
         <form
           action=""
           onSubmit={register_admin}
           className="space-y-7 relative z-10">
-          <h2 className="text-3xl font-extrabold text-primary text-center mb-6 drop-shadow-lg tracking-tight flex items-center justify-center gap-2">
+          <h2 className="text-3xl font-extrabold text-white text-center mb-2 tracking-tight flex items-center justify-center gap-2">
             <FaUserPlus className="text-primary" /> Admin Sign-up
           </h2>
+          <p className="text-center text-sm text-muted mb-4">
+            Create an admin account
+          </p>
           <div className="space-y-2">
             <label
               className="block text-muted font-medium"
