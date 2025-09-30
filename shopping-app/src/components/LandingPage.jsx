@@ -1,20 +1,37 @@
-import { Link } from 'react-router-dom'
-import '../styles/LandingPage.css'
+import { FaUser, FaUserShield } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 function LandingPage() {
-    return (
-        <div className='LandingPage'>
-            <Link to="/admin-login">
-                <img src="https://imgs.search.brave.com/SFleVxA2dyKQfqlkzxiilyusRsQ_4NPkdoAvhyAdH7M/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/cHJlbWl1bS12ZWN0/b3IvY29tcHV0ZXIt/dXNlci1pY29uLXZl/Y3Rvcl83ODAyOTAt/OTg2Ny5qcGc_c2Vt/dD1haXNfaHlicmlk/Jnc9NzQwJnE9ODA" alt="" />
-                <h1>Admin Login</h1>
-            </Link>
-
-            <Link to="/user-login">
-                <img src="https://imgs.search.brave.com/ZjYCn841WlQJNLdF4VjEJ5eutqAVGIAHn09XJznEAGQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4t/aWNvbnMtcG5nLmZs/YXRpY29uLmNvbS8x/MjgvMTY3ODUvMTY3/ODU4NzAucG5n" alt="" />
-                <h1>User Login</h1>
-            </Link>
-        </div>
-    )
+  return (
+    <div className="min-h-screen flex items-center justify-center font-sans">
+      <div className="flex flex-col md:flex-row gap-10 justify-center items-center">
+        <Link
+          className="glass-panel w-80 p-10 hover:scale-105 transition-transform ring-1 ring-white/20"
+          to="/admin-login">
+          <div className="relative z-10 flex flex-col items-center">
+            <FaUserShield className="w-20 h-20 text-primary drop-shadow mb-4" />
+            <h1 className="text-2xl font-bold text-primary mb-2">
+              Admin Login
+            </h1>
+            <span className="text-muted text-sm">
+              For store managers and admins
+            </span>
+          </div>
+        </Link>
+        <Link
+          className="glass-panel w-80 p-10 hover:scale-105 transition-transform ring-1 ring-white/20"
+          to="/user-login">
+          <div className="relative z-10 flex flex-col items-center">
+            <FaUser className="w-20 h-20 text-accent drop-shadow mb-4" />
+            <h1 className="text-2xl font-bold text-accent mb-2">User Login</h1>
+            <span className="text-muted text-sm">
+              For customers and shoppers
+            </span>
+          </div>
+        </Link>
+      </div>
+    </div>
+  );
 }
 
-export default LandingPage
+export default LandingPage;
