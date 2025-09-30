@@ -1,185 +1,88 @@
 @import "tailwindcss";
 
-/* Tailwind v4 theme tokens — Neon Slate (extended) */
+/* Tailwind v4 theme tokens — Cursor Inspired */
 @theme {
-  --color-primary: #7c3aed; /* vivid violet */
-  --color-primary-light: #a78bfa;
-  --color-primary-dark: #5b21b6;
-  --color-accent: #06b6d4; /* electric cyan */
-  --color-background: #0a0b0f; /* charcoal */
-  --color-card: #11131a;
-  --color-border: #1f2430;
-  --color-muted: #cbd5e1;
-  /* Additional brand colors */
-  --color-secondary: #f97316; /* orange-500 */
-  --color-success: #10b981; /* emerald-500 */
-  --color-warning: #f59e0b; /* amber-500 */
-  --color-danger: #ef4444; /* red-500 */
-  --color-info: #38bdf8; /* sky-400 */
+  --color-primary: #00ff41;
+  /* Cursor's vibrant green */
+  --color-accent: #00ff41;
+  /* Using green as the main accent */
+  --color-background: #000000;
+  /* Pure black background */
+  --color-card: #111111;
+  /* Off-black for cards and panels */
+  --color-border: #333333;
+  /* Dark grey for borders */
+  --color-muted: #888888;
+  /* Lighter grey for muted text */
 }
 
 @layer base {
-  html {
-    @apply antialiased bg-background text-slate-100;
-  }
+
+  html,
   body {
-    @apply bg-background text-slate-100;
+    @apply antialiased bg-background text-slate-200 font-sans;
   }
+
   p {
-    @apply text-slate-200;
+    @apply text-slate-300;
   }
+
   label {
     @apply text-muted;
   }
+
   h1,
   h2,
   h3,
   h4 {
     @apply tracking-tight text-white;
   }
+
   a {
-    @apply text-accent underline underline-offset-4 hover:opacity-90;
+    @apply text-primary/90 hover:text-primary transition-colors;
   }
 }
 
 @layer components {
+
+  /* Main action button (green) */
   .btn-primary {
-    @apply relative inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-white bg-gradient-to-r from-primary to-primary-light shadow-2xl hover:from-primary-dark hover:to-primary transition duration-200 focus:outline-none focus:ring-2 focus:ring-accent/70 disabled:opacity-60 disabled:cursor-not-allowed;
+    @apply relative inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-black bg-primary shadow-[0_0_15px_rgba(0, 255, 65, 0.3)] hover:bg-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:opacity-50 disabled:cursor-not-allowed;
   }
-  .btn-accent {
-    @apply relative inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-slate-900 bg-gradient-to-r from-accent to-cyan-400 shadow-2xl hover:from-cyan-500 hover:to-accent transition duration-200 focus:outline-none focus:ring-2 focus:ring-primary/70 disabled:opacity-60 disabled:cursor-not-allowed;
+
+  .btn-primary:hover {
+    @apply bg-indigo-700 shadow-lg scale-105;
+    /* ✨ This adds the hover effect! */
   }
+
+  /* Secondary/alternate button */
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-white bg-secondary hover:opacity-90 transition;
-  }
-  .btn-success {
-    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-white bg-success hover:opacity-90 transition;
-  }
-  .btn-warning {
-    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-slate-900 bg-warning hover:opacity-95 transition;
-  }
-  .btn-danger {
-    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-white bg-danger hover:opacity-90 transition;
-  }
-  .btn-info {
-    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-slate-900 bg-info hover:opacity-95 transition;
+    @apply relative inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-white bg-card border border-border hover:border-white/50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:opacity-50 disabled:cursor-not-allowed;
   }
 
-  .btn-outline {
-    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg font-semibold border border-white/20 text-slate-100 hover:bg-white/10 transition disabled:opacity-60 disabled:cursor-not-allowed;
-  }
-  .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-slate-200 hover:bg-white/10 transition disabled:opacity-60 disabled:cursor-not-allowed;
+  .input-cursor {
+    @apply w-full px-4 py-2 rounded-lg bg-card text-white placeholder:text-slate-500 border border-border focus:ring-2 focus:ring-primary/80 focus:border-primary/50 focus:outline-none transition-colors;
   }
 
-  .input-glass {
-    @apply w-full px-4 py-2 rounded-lg bg-white/10 text-white placeholder:text-slate-300 border border-white/20 backdrop-blur hover:bg-white/15 focus:ring-2 focus:ring-accent/70 focus:border-white/30 focus:outline-none shadow-inner;
-  }
-  .glass-panel {
-    @apply relative bg-white/10 backdrop-blur-2xl border border-white/15 rounded-2xl shadow-2xl ring-1 ring-white/10 overflow-hidden text-slate-100;
-  }
-  /* New bordered box variants */
-  .panel-bordered {
-    @apply glass-panel border-white/25 ring-2 ring-white/15;
-  }
-  .panel-outline {
-    @apply glass-panel border border-accent/40 ring-1 ring-accent/30;
+  .cursor-panel {
+    @apply relative bg-card/80 backdrop-blur-sm border border-border rounded-2xl shadow-2xl;
   }
 
-  /* Product card for SmartShop */
   .card-product {
-    @apply glass-panel p-4 hover:shadow-[0_20px_80px_rgba(124,58,237,0.25)] transition-transform duration-300;
+    @apply cursor-panel p-4 border-border hover:border-primary/30 transition-all duration-300;
   }
+
   .card-product:hover {
     transform: translateY(-4px);
+    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.3);
   }
-  .card-media {
-    @apply w-full aspect-[4/3] overflow-hidden rounded-xl border border-white/10 bg-white/5;
-  }
-  .card-media img {
-    @apply w-full h-full object-cover;
-  }
+
   .card-title {
     @apply mt-3 text-lg font-semibold text-white line-clamp-2;
   }
-  .card-price {
-    @apply mt-1 text-accent font-bold;
-  }
+
   .card-meta {
     @apply mt-2 text-sm text-muted;
-  }
-
-  /* Badges */
-  .badge {
-    @apply inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium border;
-  }
-  .badge-success {
-    @apply badge border-success text-emerald-300 bg-success/10;
-  }
-  .badge-warn {
-    @apply badge border-warning text-amber-300 bg-warning/10;
-  }
-  .badge-info {
-    @apply badge border-info text-info bg-info/10;
-  }
-  .badge-danger {
-    @apply badge border-danger text-red-300 bg-danger/10;
-  }
-  .badge-secondary {
-    @apply badge border-secondary text-orange-300 bg-secondary/10;
-  }
-
-  /* Skeleton loaders */
-  .skeleton {
-    @apply animate-pulse bg-white/10 rounded-md;
-  }
-  .skeleton-line {
-    @apply skeleton h-4;
-  }
-
-  /* Layout helpers */
-  .container-screen {
-    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
-  }
-  .section-spacing {
-    @apply py-8 sm:py-12 lg:py-16;
-  }
-  .grid-products {
-    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6;
-  }
-
-  /* Link animation */
-  .link-underline {
-    @apply relative inline-block;
-  }
-  .link-underline::after {
-    content: "";
-    @apply absolute left-0 -bottom-1 h-[2px] w-0 bg-accent transition-all duration-200;
-  }
-  .link-underline:hover::after {
-    width: 100%;
-  }
-
-  /* Page / panel animations */
-  .fade-in {
-    animation: fadeIn 300ms ease-out;
-  }
-  .rise-in {
-    animation: riseIn 350ms ease-out;
-  }
-
-  /* Auth form enhancement without JSX changes */
-  .panel-bordered form {
-    @apply bg-card/30 border border-white/10 rounded-xl p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)];
-  }
-  .panel-bordered form > .space-y-2 {
-    @apply bg-white/5 border border-white/10 rounded-lg p-3;
-  }
-  .panel-bordered .input-glass {
-    @apply bg-white/15 border-white/25 shadow-inner;
-  }
-  .panel-bordered .input-glass:focus {
-    @apply ring-accent/70;
   }
 }
 
@@ -187,15 +90,18 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
 }
+
 @keyframes riseIn {
   from {
     opacity: 0;
     transform: translateY(6px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
