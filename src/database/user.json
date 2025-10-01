@@ -17,6 +17,15 @@
       "re_password": "raj",
       "phone": "19823798123",
       "age": "23"
+    },
+    {
+      "id": "956a",
+      "U_name": "seema",
+      "email": "seemam@outlook.com",
+      "password": "123456",
+      "re_password": "123456",
+      "phone": "657657657658",
+      "age": "65"
     }
   ]
 }
