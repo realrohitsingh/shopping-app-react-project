@@ -59,35 +59,32 @@ function AdminSign() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center font-sans px-4 py-12">
-      <div className="relative w-full max-w-md">
-        {/* Back Button */}
+    <div className="min-h-screen font-sans px-4 py-16 md:py-20">
+      <div className="relative w-full max-w-md mx-auto">
         <button
           type="button"
-          className="absolute -top-12 left-0 flex items-center gap-2 text-text/70 hover:text-primary transition-colors group"
+          className="mb-6 flex items-center gap-2 px-4 py-2 rounded-xl bg-card/30 border border-border/30 backdrop-blur-sm text-text/70 hover:text-primary hover:border-primary/40 hover:bg-card/50 transition-all duration-300 group"
           onClick={handleBack}>
-          <FaArrowLeft className="group-hover:-translate-x-1 transition-transform" />
+          <FaArrowLeft className="group-hover:-translate-x-1 transition-transform duration-300" />
           <span className="font-medium">Back to Login</span>
         </button>
-
-        {/* Registration Card */}
-        <div className="glass-panel p-8 sm:p-10 animate-[scaleIn_0.5s_ease-out] max-h-[85vh] overflow-y-auto">
-          {/* Header */}
-          <div className="text-center mb-6">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-purple-600/20 border border-primary/30 mb-4">
-              <FaShieldAlt className="text-3xl text-primary" />
+        <div className="glass-panel p-8 sm:p-10 animate-[scaleIn_0.5s_ease-out] relative">
+          <div className="absolute top-0 right-0 w-40 h-40 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="relative text-center mb-8">
+            <div className="relative inline-block mb-4">
+              <div className="absolute inset-0 bg-primary/30 rounded-3xl blur-2xl animate-pulse" />
+              <div className="relative inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-primary/25 to-purple-600/25 border-2 border-primary/40 shadow-[0_0_40px_rgba(139,92,246,0.4)]">
+                <FaShieldAlt className="text-4xl text-primary drop-shadow-lg" />
+              </div>
             </div>
-            <h2 className="text-3xl font-bold text-white mb-2">
-              SmartShop Admin Setup
+            <h2 className="text-4xl font-extrabold text-white mb-3">
+              SmartShop <span className="text-primary">Admin Setup</span>
             </h2>
-            <p className="text-text/70">
+            <p className="text-text/60 text-base">
               Create your admin account to manage SmartShop
             </p>
           </div>
-
-          {/* Form */}
           <form onSubmit={register_admin} className="space-y-5">
-            {/* Username */}
             <div className="space-y-2">
               <label
                 className="block text-text/90 font-medium text-sm"
@@ -108,7 +105,6 @@ function AdminSign() {
                 <FaUser className="absolute left-4 top-1/2 -translate-y-1/2 text-primary/70" />
               </div>
             </div>
-            {/* Email */}
             <div className="space-y-2">
               <label
                 className="block text-text/90 font-medium text-sm"
@@ -129,7 +125,6 @@ function AdminSign() {
                 <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 text-primary/70" />
               </div>
             </div>
-            {/* Password */}
             <div className="space-y-2">
               <label
                 className="block text-text/90 font-medium text-sm"
@@ -151,8 +146,6 @@ function AdminSign() {
                 <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-primary/70" />
               </div>
             </div>
-
-            {/* Confirm Password */}
             <div className="space-y-2">
               <label
                 className="block text-text/90 font-medium text-sm"
@@ -174,7 +167,6 @@ function AdminSign() {
                 <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-primary/70" />
               </div>
             </div>
-            {/* Phone */}
             <div className="space-y-2">
               <label
                 className="block text-text/90 font-medium text-sm"
@@ -195,8 +187,6 @@ function AdminSign() {
                 <FaPhone className="absolute left-4 top-1/2 -translate-y-1/2 text-primary/70" />
               </div>
             </div>
-
-            {/* Age */}
             <div className="space-y-2">
               <label
                 className="block text-text/90 font-medium text-sm"
@@ -219,20 +209,17 @@ function AdminSign() {
                 <FaBirthdayCake className="absolute left-4 top-1/2 -translate-y-1/2 text-primary/70" />
               </div>
             </div>
-            {/* Submit Button */}
             <button type="submit" className="w-full btn-primary mt-6">
               <FaUserPlus className="text-lg" />
               <span>Create Admin Account</span>
             </button>
-
-            {/* Login Link */}
             <div className="text-center pt-4 border-t border-border/50">
               <p className="text-text/70 text-sm">
                 Already have an account?{" "}
                 <Link
                   className="link-primary font-semibold"
                   to="/admin-login">
-                  Sign In
+                  Login
                 </Link>
               </p>
             </div>

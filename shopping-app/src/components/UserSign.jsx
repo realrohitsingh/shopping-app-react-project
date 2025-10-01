@@ -59,35 +59,32 @@ function UserSign() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center font-sans px-4 py-12">
-      <div className="relative w-full max-w-md">
-        {/* Back Button */}
+    <div className="min-h-screen font-sans px-4 py-16 md:py-20">
+      <div className="relative w-full max-w-md mx-auto">
         <button
           type="button"
-          className="absolute -top-12 left-0 flex items-center gap-2 text-text/70 hover:text-accent transition-colors group"
+          className="mb-6 flex items-center gap-2 px-4 py-2 rounded-xl bg-card/30 border border-border/30 backdrop-blur-sm text-text/70 hover:text-accent hover:border-accent/40 hover:bg-card/50 transition-all duration-300 group"
           onClick={handleBack}>
-          <FaArrowLeft className="group-hover:-translate-x-1 transition-transform" />
+          <FaArrowLeft className="group-hover:-translate-x-1 transition-transform duration-300" />
           <span className="font-medium">Back to Login</span>
         </button>
-
-        {/* Registration Card */}
-        <div className="glass-panel p-8 sm:p-10 animate-[scaleIn_0.5s_ease-out] max-h-[85vh] overflow-y-auto">
-          {/* Header */}
-          <div className="text-center mb-6">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-accent/20 to-cyan-600/20 border border-accent/30 mb-4">
-              <FaShoppingBag className="text-3xl text-accent" />
+        <div className="glass-panel p-8 sm:p-10 animate-[scaleIn_0.5s_ease-out] relative">
+          <div className="absolute top-0 right-0 w-40 h-40 bg-accent/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="relative text-center mb-8">
+            <div className="relative inline-block mb-4">
+              <div className="absolute inset-0 bg-accent/30 rounded-3xl blur-2xl animate-pulse" />
+              <div className="relative inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-accent/25 to-cyan-600/25 border-2 border-accent/40 shadow-[0_0_40px_rgba(6,182,212,0.4)]">
+                <FaShoppingBag className="text-4xl text-accent drop-shadow-lg" />
+              </div>
             </div>
-            <h2 className="text-3xl font-bold text-white mb-2">
-              Join SmartShop
+            <h2 className="text-4xl font-extrabold text-white mb-3">
+              Join <span className="text-accent">SmartShop</span>
             </h2>
-            <p className="text-text/70">
+            <p className="text-text/60 text-base">
               Create your account and start shopping smarter
             </p>
           </div>
-
-          {/* Form */}
           <form onSubmit={register_user} className="space-y-5">
-            {/* Username */}
             <div className="space-y-2">
               <label
                 className="block text-text/90 font-medium text-sm"
@@ -108,7 +105,6 @@ function UserSign() {
                 <FaUser className="absolute left-4 top-1/2 -translate-y-1/2 text-accent/70" />
               </div>
             </div>
-            {/* Email */}
             <div className="space-y-2">
               <label
                 className="block text-text/90 font-medium text-sm"
@@ -129,7 +125,6 @@ function UserSign() {
                 <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 text-accent/70" />
               </div>
             </div>
-            {/* Password */}
             <div className="space-y-2">
               <label
                 className="block text-text/90 font-medium text-sm"
@@ -151,8 +146,6 @@ function UserSign() {
                 <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-accent/70" />
               </div>
             </div>
-
-            {/* Confirm Password */}
             <div className="space-y-2">
               <label
                 className="block text-text/90 font-medium text-sm"
@@ -174,7 +167,6 @@ function UserSign() {
                 <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-accent/70" />
               </div>
             </div>
-            {/* Phone */}
             <div className="space-y-2">
               <label
                 className="block text-text/90 font-medium text-sm"
@@ -195,8 +187,6 @@ function UserSign() {
                 <FaPhone className="absolute left-4 top-1/2 -translate-y-1/2 text-accent/70" />
               </div>
             </div>
-
-            {/* Age */}
             <div className="space-y-2">
               <label
                 className="block text-text/90 font-medium text-sm"
@@ -219,20 +209,17 @@ function UserSign() {
                 <FaBirthdayCake className="absolute left-4 top-1/2 -translate-y-1/2 text-accent/70" />
               </div>
             </div>
-            {/* Submit Button */}
             <button type="submit" className="w-full btn-accent mt-6">
               <FaUserPlus className="text-lg" />
               <span>Create Account</span>
             </button>
-
-            {/* Login Link */}
             <div className="text-center pt-4 border-t border-border/50">
               <p className="text-text/70 text-sm">
                 Already have an account?{" "}
                 <Link
                   className="link-accent font-semibold"
                   to="/user-login">
-                  Sign In
+                  Login
                 </Link>
               </p>
             </div>

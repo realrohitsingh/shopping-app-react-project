@@ -1,11 +1,13 @@
 @import "tailwindcss";
 
-/* Tailwind v4 theme tokens — Cursor.com Theme */
+/* Tailwind v4 theme tokens — Enhanced Theme */
 @theme {
   --color-primary: #8b5cf6;
+  --color-primary-dark: #7c3aed;
   --color-accent: #06b6d4;
+  --color-accent-dark: #0891b2;
   --color-success: #10b981;
-  --color-background: #0d0d0d;
+  --color-background: #0a0a0a;
   --color-card: #1a1a1a;
   --color-border: #2d2d2d;
   --color-muted: #9ca3af;
@@ -18,6 +20,10 @@
   html,
   body {
     @apply antialiased bg-background text-text font-sans;
+  }
+
+  * {
+    @apply transition-none;
   }
 
   p {
@@ -33,13 +39,112 @@
   h3,
   h4 {
     @apply tracking-tight text-white font-bold;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   }
 
   a {
     @apply text-primary hover:text-primary/80 transition-colors;
   }
+
 }
 
+/* Tailwind v4 Custom Components Layer */
+@layer components {
+
+  /* ============================================
+     PRIMARY COMPONENTS (buttons & inputs)
+     NOTE: These use !important to override Tailwind utilities
+     ============================================ */
+
+  /* Input Component - Glass Morphism */
+  .input-glass {
+    @apply w-full;
+    padding-left: 3rem !important;
+    padding-right: 1.25rem !important;
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+    font-size: 15px !important;
+    line-height: 22px !important;
+    height: 48px !important;
+  }
+
+  /* Button Components - Modern & Premium */
+  .btn-primary,
+  .btn-accent {
+    @apply relative overflow-hidden inline-flex items-center justify-center gap-2;
+    padding: 0.875rem 2rem !important;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  }
+
+  .btn-primary svg,
+  .btn-accent svg {
+    @apply flex-shrink-0;
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  /* Shimmer Effect */
+  .btn-primary::before,
+  .btn-accent::before {
+    content: "";
+    @apply absolute inset-0;
+    background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+  }
+
+  .btn-primary:hover::before,
+  .btn-accent:hover::before {
+    transform: translateX(100%);
+  }
+
+  /* Primary Button - Purple Theme */
+  .btn-primary {
+    background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 50%, #8b5cf6 100%) !important;
+    background-size: 200% 100% !important;
+    box-shadow: 0 8px 24px -4px rgba(139, 92, 246, 0.4),
+      0 0 0 1px rgba(139, 92, 246, 0.2) inset,
+      0 4px 12px rgba(139, 92, 246, 0.3) !important;
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 20px 40px -8px rgba(139, 92, 246, 0.6),
+      0 0 0 1px rgba(139, 92, 246, 0.4) inset,
+      0 0 40px rgba(139, 92, 246, 0.4),
+      0 8px 16px rgba(139, 92, 246, 0.3) !important;
+    transform: translateY(-4px) scale(1.02) !important;
+    background-position: 100% 0 !important;
+    filter: brightness(1.15) saturate(1.2) !important;
+  }
+
+  /* Accent Button - Cyan Theme */
+  .btn-accent {
+    background: linear-gradient(135deg, #06b6d4 0%, #0891b2 50%, #06b6d4 100%) !important;
+    background-size: 200% 100% !important;
+    box-shadow: 0 8px 24px -4px rgba(6, 182, 212, 0.4),
+      0 0 0 1px rgba(6, 182, 212, 0.2) inset,
+      0 4px 12px rgba(6, 182, 212, 0.3) !important;
+  }
+
+  .btn-accent:hover {
+    box-shadow: 0 20px 40px -8px rgba(6, 182, 212, 0.6),
+      0 0 0 1px rgba(6, 182, 212, 0.4) inset,
+      0 0 40px rgba(6, 182, 212, 0.4),
+      0 8px 16px rgba(6, 182, 212, 0.3) !important;
+    transform: translateY(-4px) scale(1.02) !important;
+    background-position: 100% 0 !important;
+    filter: brightness(1.15) saturate(1.2) !important;
+  }
+
+  /* Active States */
+  .btn-primary:active,
+  .btn-accent:active {
+    transform: translateY(-1px) scale(0.98) !important;
+    transition: all 0.1s !important;
+  }
+}
+
+/* Enhanced Animations */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -53,7 +158,7 @@
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
 
   to {
@@ -65,7 +170,7 @@
 @keyframes slideDown {
   from {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(-30px);
   }
 
   to {
@@ -77,11 +182,69 @@
 @keyframes scaleIn {
   from {
     opacity: 0;
-    transform: scale(0.95);
+    transform: scale(0.9);
   }
 
   to {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes glow {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }

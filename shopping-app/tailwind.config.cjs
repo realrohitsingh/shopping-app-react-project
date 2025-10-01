@@ -1,137 +1,118 @@
 const plugin = require("tailwindcss/plugin");
 
+/**
+ * Tailwind CSS Component Plugin
+ *
+ * NOTE: .btn-primary, .btn-accent, and .input-glass are defined in App.css
+ * with !important flags. Only utility components are defined here.
+ */
 module.exports = {
   plugins: [
     plugin(function ({ addComponents }) {
       addComponents({
-        ".btn-primary": {
-          position: "relative",
-          display: "inline-flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "0.5rem",
-          padding: "1rem 1.75rem",
-          fontSize: "1rem",
-          borderRadius: "0.75rem",
-          fontWeight: "700",
-          color: "white",
-          background:
-            "linear-gradient(to right, var(--color-primary), rgb(168 85 247))",
-          boxShadow: "0 10px 15px -3px rgb(139 92 246 / 0.3)",
-          transition: "all 0.2s",
-          "&:hover": {
-            boxShadow: "0 20px 25px -5px rgb(139 92 246 / 0.5)",
-            transform: "scale(1.02)",
-          },
-          "&:focus": {
-            outline: "none",
-            boxShadow: "0 0 0 2px rgb(139 92 246 / 0.5)",
-          },
-        },
-        ".btn-accent": {
-          position: "relative",
-          display: "inline-flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "0.5rem",
-          padding: "1rem 1.75rem",
-          fontSize: "1rem",
-          borderRadius: "0.75rem",
-          fontWeight: "700",
-          color: "white",
-          background:
-            "linear-gradient(to right, var(--color-accent), rgb(6 182 212))",
-          boxShadow: "0 10px 15px -3px rgb(6 182 212 / 0.3)",
-          transition: "all 0.2s",
-          "&:hover": {
-            boxShadow: "0 20px 25px -5px rgb(6 182 212 / 0.5)",
-            transform: "scale(1.02)",
-          },
-        },
+        // Secondary Button - Used for logout, settings, etc.
         ".btn-secondary": {
           position: "relative",
           display: "inline-flex",
           alignItems: "center",
           justifyContent: "center",
           gap: "0.5rem",
-          padding: "1rem 1.75rem",
+          padding: "0.875rem 2rem",
           fontSize: "1rem",
-          borderRadius: "0.75rem",
+          borderRadius: "0.875rem",
           fontWeight: "700",
           color: "var(--color-text)",
-          backgroundColor: "var(--color-card)",
-          border: "2px solid var(--color-border)",
-          transition: "all 0.2s",
+          backgroundColor: "rgb(26 26 26 / 0.6)",
+          backdropFilter: "blur(16px)",
+          border: "2px solid rgb(45 45 45 / 0.8)",
+          boxShadow:
+            "0 4px 12px rgb(0 0 0 / 0.4), 0 0 0 1px rgb(255 255 255 / 0.03) inset",
+          transition: "all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)",
+          cursor: "pointer",
+          overflow: "hidden",
+          "&::before": {
+            content: '""',
+            position: "absolute",
+            inset: "0",
+            background:
+              "linear-gradient(135deg, transparent, rgb(139 92 246 / 0.05), transparent)",
+            transform: "translateX(-100%)",
+            transition: "transform 0.6s",
+          },
           "&:hover": {
             borderColor: "rgb(139 92 246 / 0.6)",
-            backgroundColor: "rgb(26 26 26 / 0.8)",
+            backgroundColor: "rgb(26 26 26 / 0.9)",
+            boxShadow:
+              "0 12px 32px rgb(139 92 246 / 0.25), 0 0 0 1px rgb(139 92 246 / 0.15) inset, 0 0 20px rgb(139 92 246 / 0.15)",
+            transform: "translateY(-3px) scale(1.02)",
+            color: "rgb(255 255 255)",
           },
-        },
-        ".input-glass": {
-          width: "100%",
-          padding: "1.25rem 1.5rem",
-          fontSize: "1.125rem",
-          lineHeight: "1.75rem",
-          borderRadius: "0.875rem",
-          backgroundColor: "rgb(26 26 26 / 0.9)",
-          backdropFilter: "blur(8px)",
-          color: "white",
-          border: "2px solid var(--color-border)",
-          fontWeight: "500",
-          transition: "all 0.2s",
-          minHeight: "3.5rem",
-          "&::placeholder": {
-            color: "rgb(156 163 175 / 0.8)",
-            fontSize: "1rem",
+          "&:hover::before": {
+            transform: "translateX(100%)",
           },
-          "&:hover": {
-            borderColor: "rgb(139 92 246 / 0.4)",
-            backgroundColor: "rgb(26 26 26 / 0.95)",
-          },
-          "&:focus": {
-            outline: "none",
-            borderColor: "var(--color-primary)",
-            boxShadow: "0 0 0 4px rgb(139 92 246 / 0.25)",
-            backgroundColor: "rgb(26 26 26 / 1)",
+          "&:active": {
+            transform: "translateY(-1px) scale(0.98)",
+            transition: "all 0.1s",
           },
         },
         ".glass-panel": {
           position: "relative",
-          backgroundColor: "rgb(26 26 26 / 0.95)",
-          backdropFilter: "blur(24px)",
-          border: "1px solid var(--color-border)",
-          borderRadius: "1rem",
-          boxShadow: "0 25px 50px -12px rgb(0 0 0 / 0.25)",
+          backgroundColor: "rgb(26 26 26 / 0.85)",
+          backdropFilter: "blur(32px) saturate(180%)",
+          border: "1px solid rgb(45 45 45 / 0.8)",
+          borderRadius: "1.25rem",
+          boxShadow:
+            "0 25px 50px -12px rgb(0 0 0 / 0.5), 0 0 0 1px rgb(255 255 255 / 0.05) inset",
+          "&::before": {
+            content: '""',
+            position: "absolute",
+            inset: "0",
+            borderRadius: "1.25rem",
+            padding: "1px",
+            background:
+              "linear-gradient(135deg, rgb(139 92 246 / 0.3), transparent, rgb(6 182 212 / 0.3))",
+            mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+            maskComposite: "exclude",
+            pointerEvents: "none",
+            opacity: "0.5",
+          },
         },
         ".card-product": {
           position: "relative",
-          backgroundColor: "rgb(26 26 26 / 0.95)",
-          backdropFilter: "blur(24px)",
+          backgroundColor: "rgb(26 26 26 / 0.85)",
+          backdropFilter: "blur(32px) saturate(180%)",
           border: "1px solid var(--color-border)",
-          borderRadius: "1rem",
-          boxShadow: "0 25px 50px -12px rgb(0 0 0 / 0.25)",
+          borderRadius: "1.25rem",
+          boxShadow:
+            "0 25px 50px -12px rgb(0 0 0 / 0.5), 0 0 0 1px rgb(255 255 255 / 0.03) inset",
           padding: "1.5rem",
           cursor: "pointer",
-          transition: "all 0.3s",
+          transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
           "&:hover": {
-            borderColor: "rgb(139 92 246 / 0.5)",
-            boxShadow: "0 25px 50px -12px rgb(139 92 246 / 0.1)",
-            transform: "translateY(-4px)",
+            borderColor: "rgb(139 92 246 / 0.6)",
+            boxShadow:
+              "0 30px 60px -12px rgb(139 92 246 / 0.25), 0 0 40px rgb(139 92 246 / 0.1)",
+            transform: "translateY(-8px) scale(1.02)",
+            backgroundColor: "rgb(26 26 26 / 0.95)",
           },
         },
         ".feature-card": {
           position: "relative",
-          backgroundColor: "rgb(26 26 26 / 0.95)",
-          backdropFilter: "blur(24px)",
+          backgroundColor: "rgb(26 26 26 / 0.85)",
+          backdropFilter: "blur(32px) saturate(180%)",
           border: "1px solid var(--color-border)",
-          borderRadius: "1rem",
-          boxShadow: "0 25px 50px -12px rgb(0 0 0 / 0.25)",
+          borderRadius: "1.25rem",
+          boxShadow:
+            "0 25px 50px -12px rgb(0 0 0 / 0.5), 0 0 0 1px rgb(255 255 255 / 0.03) inset",
           padding: "2rem",
-          textAlign: "center",
-          transition: "all 0.3s",
+          textAlign: "left",
+          transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
           "&:hover": {
-            borderColor: "rgb(139 92 246 / 0.3)",
+            borderColor: "rgb(139 92 246 / 0.5)",
             transform: "translateY(-6px)",
+            boxShadow:
+              "0 30px 60px -12px rgb(139 92 246 / 0.2), 0 0 40px rgb(139 92 246 / 0.1)",
+            backgroundColor: "rgb(26 26 26 / 0.95)",
           },
         },
         ".link-primary": {

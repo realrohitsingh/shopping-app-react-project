@@ -13,20 +13,50 @@ import UserSign from "./components/UserSign";
 function App() {
   return (
     <div className="relative min-h-screen w-full overflow-x-hidden font-sans">
-      {/* Cursor.com inspired background */}
-      <div className="fixed inset-0 -z-10 bg-background">
-        {/* Large gradient orbs for depth */}
-        <div className="absolute top-0 -left-40 w-[600px] h-[600px] bg-primary/30 rounded-full blur-[120px] animate-pulse" />
-        <div className="absolute bottom-0 -right-40 w-[600px] h-[600px] bg-accent/30 rounded-full blur-[120px] animate-pulse"
-          style={{ animationDelay: '1s', animationDuration: '3s' }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-purple-500/20 rounded-full blur-[100px]" />
-
-        {/* Subtle grid pattern */}
-        <div
-          className="absolute inset-0 opacity-[0.15]"
+<div className="fixed inset-0 -z-10 bg-background">
+<div
+          className="absolute top-0 -left-40 w-[700px] h-[700px] bg-primary/40 rounded-full blur-[140px] animate-pulse"
           style={{
-            backgroundImage: `linear-gradient(to right, rgba(139,92,246,0.15) 1px, transparent 1px), linear-gradient(to bottom, rgba(139,92,246,0.15) 1px, transparent 1px)`,
-            backgroundSize: '48px 48px',
+            animationDuration: '4s',
+            background: 'radial-gradient(circle, rgba(139, 92, 246, 0.4) 0%, rgba(139, 92, 246, 0.1) 50%, transparent 100%)'
+          }}
+        />
+        <div
+          className="absolute bottom-0 -right-40 w-[700px] h-[700px] bg-accent/40 rounded-full blur-[140px] animate-pulse"
+          style={{
+            animationDelay: '1s',
+            animationDuration: '5s',
+            background: 'radial-gradient(circle, rgba(6, 182, 212, 0.4) 0%, rgba(6, 182, 212, 0.1) 50%, transparent 100%)'
+          }}
+        />
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-500/25 rounded-full blur-[120px] animate-pulse"
+          style={{
+            animationDelay: '2s',
+            animationDuration: '6s',
+            background: 'radial-gradient(circle, rgba(168, 85, 247, 0.25) 0%, rgba(168, 85, 247, 0.05) 50%, transparent 100%)'
+          }}
+        />
+<div
+          className="absolute inset-0 opacity-[0.12]"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, rgba(139,92,246,0.2) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(139,92,246,0.2) 1px, transparent 1px)
+            `,
+            backgroundSize: '60px 60px',
+          }}
+        />
+<div
+          className="absolute inset-0"
+          style={{
+            background: 'radial-gradient(circle at 50% 50%, transparent 0%, rgba(10, 10, 10, 0.4) 100%)'
+          }}
+        />
+<div
+          className="absolute inset-0 opacity-[0.02]"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E")`,
           }}
         />
       </div>

@@ -41,30 +41,29 @@ function UserForgotPass() {
   return (
     <div className="min-h-screen flex items-center justify-center font-sans px-4 py-12">
       <div className="relative w-full max-w-md">
-        {/* Back Button */}
         <Link
           to="/user-login"
-          className="absolute -top-12 left-0 flex items-center gap-2 text-text/70 hover:text-accent transition-colors group">
-          <FaArrowLeft className="group-hover:-translate-x-1 transition-transform" />
+          className="absolute -top-14 left-0 flex items-center gap-2 px-4 py-2 rounded-xl bg-card/30 border border-border/30 backdrop-blur-sm text-text/70 hover:text-accent hover:border-accent/40 hover:bg-card/50 transition-all duration-300 group">
+          <FaArrowLeft className="group-hover:-translate-x-1 transition-transform duration-300" />
           <span className="font-medium">Back to Login</span>
         </Link>
-
-        {/* Recovery Card */}
-        <div className="glass-panel p-8 sm:p-10 animate-[scaleIn_0.5s_ease-out]">
-          {/* Header */}
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-accent/20 to-cyan-600/20 border border-accent/30 mb-4">
-              <FaKey className="text-3xl text-accent" />
+        <div className="glass-panel p-10 sm:p-12 animate-[scaleIn_0.5s_ease-out] relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-40 h-40 bg-accent/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 left-0 w-40 h-40 bg-cyan-500/10 rounded-full blur-3xl" />
+          <div className="relative text-center mb-10">
+            <div className="relative inline-block mb-5">
+              <div className="absolute inset-0 bg-accent/30 rounded-3xl blur-2xl animate-pulse" />
+              <div className="relative inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-accent/25 to-cyan-600/25 border-2 border-accent/40 shadow-[0_0_40px_rgba(6,182,212,0.4)]">
+                <FaKey className="text-4xl text-accent drop-shadow-lg" />
+              </div>
             </div>
-            <h2 className="text-3xl font-bold text-white mb-2">
-              Recover SmartShop Account
+            <h2 className="text-4xl font-extrabold text-white mb-3">
+              Recover <span className="text-accent">Account</span>
             </h2>
-            <p className="text-text/70">
+            <p className="text-text/60 text-lg">
               Enter your email to recover your account credentials
             </p>
           </div>
-
-          {/* Form */}
           <form onSubmit={handleRecovery} className="space-y-6">
             <div className="space-y-2">
               <label
@@ -85,49 +84,44 @@ function UserForgotPass() {
                 <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 text-accent/70" />
               </div>
             </div>
-
-            {/* Recovered Details */}
             {recoveredDetails && (
-              <div className="bg-gradient-to-br from-success/20 to-success/10 border border-success/30 rounded-xl p-5 animate-[slideUp_0.4s_ease-out]">
-                <div className="flex items-center gap-2 mb-3">
-                  <FaCheckCircle className="text-success text-xl" />
-                  <h4 className="font-bold text-white">Account Found!</h4>
-                </div>
-                <div className="space-y-2 text-text/90">
-                  <p className="flex justify-between">
-                    <span className="font-medium">Username:</span>
-                    <span className="text-white font-semibold">{recoveredDetails.U_name}</span>
-                  </p>
-                  <p className="flex justify-between">
-                    <span className="font-medium">Password:</span>
-                    <span className="text-white font-mono font-semibold">{recoveredDetails.password}</span>
-                  </p>
-                </div>
-                <div className="mt-4 pt-4 border-t border-success/30">
+              <div className="relative bg-gradient-to-br from-success/25 to-success/10 border-2 border-success/40 rounded-2xl p-6 animate-[slideUp_0.4s_ease-out] shadow-[0_0_40px_rgba(16,185,129,0.3)]">
+                <div className="absolute top-0 right-0 w-20 h-20 bg-success/20 rounded-full blur-2xl" />
+                <div className="relative">
+                  <div className="flex items-center gap-3 mb-5">
+                    <FaCheckCircle className="text-success text-2xl drop-shadow-lg" />
+                    <h4 className="text-xl font-extrabold text-white">Account Found!</h4>
+                  </div>
+                  <div className="space-y-4 text-text/90 mb-5">
+                    <div className="flex justify-between items-center p-3 bg-card/30 rounded-xl backdrop-blur-sm">
+                      <span className="font-semibold text-text/70">Username:</span>
+                      <span className="text-white font-bold text-lg">{recoveredDetails.U_name}</span>
+                    </div>
+                    <div className="flex justify-between items-center p-3 bg-card/30 rounded-xl backdrop-blur-sm">
+                      <span className="font-semibold text-text/70">Password:</span>
+                      <span className="text-white font-mono font-bold text-lg">{recoveredDetails.password}</span>
+                    </div>
+                  </div>
                   <Link
                     to="/user-login"
-                    className="flex items-center justify-center gap-2 text-success hover:text-success/80 font-semibold transition-colors">
-                    <FaShoppingBag />
+                    className="flex items-center justify-center gap-3 px-6 py-3 bg-success/20 border border-success/40 rounded-xl text-success hover:bg-success/30 hover:border-success/60 font-bold transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(16,185,129,0.4)]">
+                    <FaShoppingBag className="text-lg" />
                     <span>Go to Login</span>
                   </Link>
                 </div>
               </div>
             )}
-
-            {/* Submit Button */}
             <button type="submit" className="w-full btn-accent">
               <FaKey className="text-lg" />
               <span>Recover Account</span>
             </button>
-
-            {/* Back Link */}
             <div className="text-center pt-4 border-t border-border/50">
               <p className="text-text/70 text-sm">
                 Remember your password?{" "}
                 <Link
                   className="link-accent font-semibold"
                   to="/user-login">
-                  Sign In
+                  Login
                 </Link>
               </p>
             </div>
