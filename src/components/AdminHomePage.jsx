@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import {
   FaArrowRight,
@@ -15,16 +16,39 @@ import { toast } from "react-toastify";
 function AdminHomePage() {
   const navigate = useNavigate();
   const [adminData, setAdminData] = useState(null);
+  const [productCount, setProductCount] = useState(0);
 
   useEffect(() => {
     const loggedInAdmin = localStorage.getItem("loggedInAdmin");
     if (loggedInAdmin) {
       setAdminData(JSON.parse(loggedInAdmin));
+      fetchProductCount();
     } else {
       toast.error("Please login first");
       navigate("/admin-login");
     }
+
+    // Listen for product updates to refresh product count
+    const handleProductUpdate = () => {
+      fetchProductCount();
+    };
+
+    window.addEventListener('productUpdated', handleProductUpdate);
+
+    return () => {
+      window.removeEventListener('productUpdated', handleProductUpdate);
+    };
   }, [navigate]);
+
+  const fetchProductCount = async () => {
+    try {
+      const response = await axios.get("http://localhost:1002/products");
+      setProductCount(response.data.length);
+    } catch (error) {
+      console.error("Error fetching product count:", error);
+      setProductCount(0);
+    }
+  };
 
   const handleLogout = () => {
     localStorage.removeItem("loggedInAdmin");
@@ -40,28 +64,28 @@ function AdminHomePage() {
     {
       icon: FaShoppingCart,
       label: "Total Orders",
-      value: "156",
+      value: "No Orders",
       iconBg: "bg-gradient-to-br from-primary/20 to-purple-600/20 border-primary/30",
       iconColor: "text-primary"
     },
     {
       icon: FaDollarSign,
       label: "Revenue",
-      value: "$12,450",
+      value: "No Revenue",
       iconBg: "bg-gradient-to-br from-accent/20 to-cyan-600/20 border-accent/30",
       iconColor: "text-accent"
     },
     {
       icon: FaUsers,
       label: "Customers",
-      value: "1,234",
+      value: "N/A",
       iconBg: "bg-gradient-to-br from-success/20 to-green-600/20 border-success/30",
       iconColor: "text-success"
     },
     {
       icon: FaBox,
       label: "Products",
-      value: "89",
+      value: productCount.toString(),
       iconBg: "bg-gradient-to-br from-primary/20 to-purple-600/20 border-primary/30",
       iconColor: "text-primary"
     },

@@ -98,6 +98,9 @@ function ManageProducts() {
 
             resetForm();
             fetchProducts();
+
+            // Notify admin dashboard to update product count
+            window.dispatchEvent(new CustomEvent('productUpdated'));
         } catch (error) {
             console.error("Error saving product:", error);
             toast.error("Failed to save product");
@@ -134,6 +137,9 @@ function ManageProducts() {
                 await axios.delete(`http://localhost:1002/products/${productId}`);
                 toast.success("Product deleted successfully!");
                 fetchProducts();
+
+                // Notify admin dashboard to update product count
+                window.dispatchEvent(new CustomEvent('productUpdated'));
             } catch (error) {
                 console.error("Error deleting product:", error);
                 toast.error("Failed to delete product");
