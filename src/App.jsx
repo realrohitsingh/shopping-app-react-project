@@ -9,6 +9,7 @@ import LandingPage from "./components/LandingPage";
 import UserForgotPass from "./components/UserForgotPass";
 import UserLogin from "./components/UserLogin";
 import UserSign from "./components/UserSign";
+import ErrorPage from "./components/ErrorPage";
 
 function App() {
   return (
@@ -64,6 +65,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/*" element={<ErrorPage/>} />
           <Route path="/admin-login" element={<AdminLogin />} />
           <Route path="/user-login" element={<UserLogin />} />
           <Route path="/user-sign" element={<UserSign />} />
