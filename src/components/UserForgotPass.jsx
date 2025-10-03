@@ -1,8 +1,10 @@
-import axios from "axios";
 import { useState } from "react";
 import { FaArrowLeft, FaCheckCircle, FaEnvelope, FaKey, FaShoppingBag } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+// 1. REMOVED: "axios" is no longer needed.
+// 2. ADDED: Import the user data directly from your JSON file.
+import userData from '../database/user.json';
 
 function UserForgotPass() {
   const [email, setEmail] = useState("");
@@ -17,25 +19,24 @@ function UserForgotPass() {
       return;
     }
 
-    axios
-      .get("http://localhost:1001/user")
-      .then((res) => {
-        const userAccount = res.data.find((user) => user.email === email);
+    // Check in JSON file first
+    let userAccount = userData.user.find((user) => user.email === email);
 
-        if (userAccount) {
-          setRecoveredDetails({
-            U_name: userAccount.U_name,
-            password: userAccount.password,
-          });
-          toast.success("Account details found!");
-        } else {
-          toast.error("No account found with that email address.");
-        }
-      })
-      .catch((err) => {
-        toast.error("Could not connect to the server.");
-        console.error(err);
+    // If not found in JSON, check in localStorage (registered users)
+    if (!userAccount) {
+      const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+      userAccount = registeredUsers.find((user) => user.email === email);
+    }
+
+    if (userAccount) {
+      setRecoveredDetails({
+        U_name: userAccount.U_name,
+        password: userAccount.password,
       });
+      toast.success("Account details found!");
+    } else {
+      toast.error("No account found with that email address.");
+    }
   }
 
   return (

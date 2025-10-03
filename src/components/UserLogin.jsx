@@ -1,8 +1,10 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { FaArrowLeft, FaLock, FaShoppingBag, FaSignInAlt, FaUser } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+// 1. REMOVED: "axios" is no longer needed.
+// 2. ADDED: Import the user data directly from your JSON file.
+import userData from '../database/user.json';
 
 function UserLogin() {
   const navigate = useNavigate();
@@ -24,35 +26,43 @@ function UserLogin() {
 
   function val_login(e) {
     e.preventDefault();
-    axios
-      .get("http://localhost:1001/user")
-      .then((res) => {
-        const foundUser = res.data.find(
-          (user) => user.email === email || user.U_name === email
-        );
-        if (foundUser) {
-          if (foundUser.password === pwd) {
-            toast.success("Login Successful! Welcome back.");
-            if (rememberMe) {
-              localStorage.setItem("rememberedUser", email);
-            } else {
-              localStorage.removeItem("rememberedUser");
-            }
-          } else {
-            toast.error("Invalid password.");
-          }
+
+    // Check in JSON file first
+    let foundUser = userData.user.find(
+      (user) => user.email === email || user.U_name === email
+    );
+
+    // If not found in JSON, check in localStorage (registered users)
+    if (!foundUser) {
+      const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+      foundUser = registeredUsers.find(
+        (user) => user.email === email || user.U_name === email
+      );
+    }
+
+    if (foundUser) {
+      if (foundUser.password === pwd) {
+        toast.success("Login Successful! Welcome back.");
+        localStorage.setItem("loggedInUser", JSON.stringify(foundUser));
+
+        if (rememberMe) {
+          localStorage.setItem("rememberedUser", email);
         } else {
-          toast.error("No user found with that email.");
+          localStorage.removeItem("rememberedUser");
         }
-      })
-      .catch((err) => {
-        toast.error("Login failed. Could not connect to the server.");
-        console.log(err);
-      })
-      .finally(() => {
-        setEmail("");
-        setPwd("");
-      });
+
+        // Navigate to user dashboard or home page
+        navigate("/");
+      } else {
+        toast.error("Invalid password.");
+      }
+    } else {
+      toast.error("No user found with that email or username.");
+    }
+
+    // Clear the fields after attempting login
+    setEmail("");
+    setPwd("");
   }
 
   return (

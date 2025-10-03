@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useState } from "react";
 import {
   FaArrowLeft,
@@ -12,6 +11,7 @@ import {
 } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+// 1. REMOVED: "axios" is no longer needed.
 
 function AdminSign() {
   const navigate = useNavigate();
@@ -45,17 +45,31 @@ function AdminSign() {
       return;
     }
 
-    axios
-      .post("http://localhost:1000/Admins", admin)
-      .then((res) => {
-        console.log(res);
-        toast.success("Registration Successful! You can now login.");
-        navigate("/admin-login");
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.error("Registration failed. Please try again.");
-      });
+    // Check if admin already exists in localStorage
+    const existingAdmins = JSON.parse(localStorage.getItem('registeredAdmins') || '[]');
+    const adminExists = existingAdmins.find(
+      existingAdmin => existingAdmin.email === admin.email || existingAdmin.U_name === admin.U_name
+    );
+
+    if (adminExists) {
+      toast.error("Admin with this email or username already exists!");
+      return;
+    }
+
+    // Create new admin object (remove re_password field)
+    const { re_password: _re_password, ...newAdmin } = admin;
+    const adminWithId = {
+      ...newAdmin,
+      id: `admin_${Date.now()}`, // Generate unique ID
+      age: parseInt(newAdmin.age)
+    };
+
+    // Add to localStorage
+    existingAdmins.push(adminWithId);
+    localStorage.setItem('registeredAdmins', JSON.stringify(existingAdmins));
+
+    toast.success("Admin registration successful! You can now login.");
+    navigate("/admin-login");
   }
 
   return (

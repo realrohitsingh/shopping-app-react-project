@@ -1,8 +1,10 @@
-import axios from "axios";
 import { useState } from "react";
 import { FaArrowLeft, FaCheckCircle, FaEnvelope, FaKey, FaShieldAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+// 1. REMOVED: "axios" is no longer needed.
+// 2. ADDED: Import the admin data directly from your JSON file.
+import adminData from '../database/admin.json';
 
 function AdminForgotPass() {
   const [email, setEmail] = useState("");
@@ -17,25 +19,24 @@ function AdminForgotPass() {
       return;
     }
 
-    axios
-      .get("http://localhost:1000/Admins")
-      .then((res) => {
-        const adminUser = res.data.find((user) => user.email === email);
+    // Check in JSON file first
+    let adminUser = adminData.Admins.find((user) => user.email === email);
 
-        if (adminUser) {
-          setRecoveredDetails({
-            U_name: adminUser.U_name,
-            password: adminUser.password,
-          });
-          toast.success("Account details found!");
-        } else {
-          toast.error("No account found with that email address.");
-        }
-      })
-      .catch((err) => {
-        toast.error("Could not connect to the server.");
-        console.error(err);
+    // If not found in JSON, check in localStorage (registered admins)
+    if (!adminUser) {
+      const registeredAdmins = JSON.parse(localStorage.getItem('registeredAdmins') || '[]');
+      adminUser = registeredAdmins.find((user) => user.email === email);
+    }
+
+    if (adminUser) {
+      setRecoveredDetails({
+        U_name: adminUser.U_name,
+        password: adminUser.password,
       });
+      toast.success("Account details found!");
+    } else {
+      toast.error("No account found with that email address.");
+    }
   }
 
   return (

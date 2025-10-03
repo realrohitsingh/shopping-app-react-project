@@ -134,6 +134,24 @@
       "stock": 45,
       "image": "https://imgs.search.brave.com/hpENRNGJU3c0aPMp-Qgblv6mX2bHcg1_iUBlL-MEI4M/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMtbmEuc3NsLWlt/YWdlcy1hbWF6b24u/Y29tL2ltYWdlcy9J/LzYxcGE3cTcwdlBM/LmpwZw",
       "id": "c008"
+    },
+    {
+      "id": "beb4",
+      "name": "Iphone 15 Plus",
+      "price": 729.99,
+      "description": "The iPhone 15 Plus is a smartphone developed by Apple, first released on September 22, 2023, and discontinued on September 9, 2025, making it the predecessor to the iPhone 16 and 16 Plus.\n It features a 6.7-inch Super Retina XDR OLED display with a resolution of 2796 × 1290 pixels, a 19.5 aspect ratio, and a peak brightness of 2000 nits.",
+      "category": "Electronics",
+      "stock": 10,
+      "image": "https://imgs.search.brave.com/WYQmMwnT-57yLHAG17lH3qpwf4A5xh8P4rmEYGaEtU8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/amFia28udWEvaW1h/Z2UvY2FjaGUvY2F0/YWxvZy9wcm9kdWN0/cy8yMDIzLzA5LzEy/MjI1My8yLTQyMHg0/MjAuanBnLndlYnA"
+    },
+    {
+      "id": "10cf",
+      "name": "Asus ROG Strix G15",
+      "price": 1099.99,
+      "description": "The ASUS ROG Strix G15 with AMD Ryzen 7, 16GB RAM, 1TB SSD, and NVIDIA GeForce RTX 3060 graphics is priced at approximately $1,099 on Walmart.com.\n Another variant of the ASUS ROG Strix G15 with a Ryzen 7 6800H processor, 16GB RAM, 1TB SSD, and RTX 3060 graphics is also listed at $1,099 on the same platform.",
+      "category": "Electronics",
+      "stock": 5,
+      "image": "https://imgs.search.brave.com/CDAL1ilGWd_LzmgAuy0f6jR-jcBd2zZvB90A80dB6RU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9odHRw/Mi5tbHN0YXRpYy5j/b20vRF9RX05QXzJY/XzgzMzU0Ny1NTE02/OTk4MjY2MjEwOV8w/NjIwMjMtVi1sYXB0/b3AtYXN1cy1yb2ct/c3RyaXgtc2Nhci0x/NS1yeXplbi05LTU5/MDBoeC02NGdiLXJh/bS0ydGIud2VicA"
     }
   ]
 }

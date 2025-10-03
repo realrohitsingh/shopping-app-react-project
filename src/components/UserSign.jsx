@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useState } from "react";
 import {
   FaArrowLeft,
@@ -12,6 +11,7 @@ import {
 } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+// 1. REMOVED: "axios" is no longer needed.
 
 function UserSign() {
   const navigate = useNavigate();
@@ -45,17 +45,31 @@ function UserSign() {
       return;
     }
 
-    axios
-      .post("http://localhost:1001/user", user)
-      .then((res) => {
-        console.log(res);
-        toast.success("Registration Successful! You can now login.");
-        navigate("/user-login");
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.error("Registration failed. Please try again.");
-      });
+    // Check if user already exists in localStorage
+    const existingUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+    const userExists = existingUsers.find(
+      existingUser => existingUser.email === user.email || existingUser.U_name === user.U_name
+    );
+
+    if (userExists) {
+      toast.error("User with this email or username already exists!");
+      return;
+    }
+
+    // Create new user object (remove re_password field)
+    const { re_password: _re_password, ...newUser } = user;
+    const userWithId = {
+      ...newUser,
+      id: `user_${Date.now()}`, // Generate unique ID
+      age: parseInt(newUser.age)
+    };
+
+    // Add to localStorage
+    existingUsers.push(userWithId);
+    localStorage.setItem('registeredUsers', JSON.stringify(existingUsers));
+
+    toast.success("User registration successful! You can now login.");
+    navigate("/user-login");
   }
 
   return (
