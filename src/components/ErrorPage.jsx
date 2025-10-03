@@ -18,7 +18,7 @@ function ErrorPage() {
       />
         <button onClick={Change} className="btn-primary">
           <FaSignInAlt className="text-lg" />
-          <h1>GO TO HOME PAGE</h1>
+          <span className="text-black text-1xl font-bold">GO TO HOME PAGE</span>
         </button>
     </div>
   );

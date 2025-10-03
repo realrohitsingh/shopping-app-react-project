@@ -5,17 +5,18 @@ import AdminForgotPass from "./components/AdminForgotPass";
 import AdminHomePage from "./components/AdminHomePage";
 import AdminLogin from "./components/AdminLogin";
 import AdminSign from "./components/AdminSign";
+import ErrorPage from "./components/ErrorPage";
 import LandingPage from "./components/LandingPage";
+import ManageProducts from "./components/ManageProducts";
 import UserForgotPass from "./components/UserForgotPass";
 import UserLogin from "./components/UserLogin";
 import UserSign from "./components/UserSign";
-import ErrorPage from "./components/ErrorPage";
 
 function App() {
   return (
     <div className="relative min-h-screen w-full overflow-x-hidden font-sans">
-<div className="fixed inset-0 -z-10 bg-background">
-<div
+      <div className="fixed inset-0 -z-10 bg-background">
+        <div
           className="absolute top-0 -left-40 w-[700px] h-[700px] bg-primary/40 rounded-full blur-[140px] animate-pulse"
           style={{
             animationDuration: '4s',
@@ -38,7 +39,7 @@ function App() {
             background: 'radial-gradient(circle, rgba(168, 85, 247, 0.25) 0%, rgba(168, 85, 247, 0.05) 50%, transparent 100%)'
           }}
         />
-<div
+        <div
           className="absolute inset-0 opacity-[0.12]"
           style={{
             backgroundImage: `
@@ -48,13 +49,13 @@ function App() {
             backgroundSize: '60px 60px',
           }}
         />
-<div
+        <div
           className="absolute inset-0"
           style={{
             background: 'radial-gradient(circle at 50% 50%, transparent 0%, rgba(10, 10, 10, 0.4) 100%)'
           }}
         />
-<div
+        <div
           className="absolute inset-0 opacity-[0.02]"
           style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E")`,
@@ -65,7 +66,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/*" element={<ErrorPage/>} />
+          <Route path="/*" element={<ErrorPage />} />
           <Route path="/admin-login" element={<AdminLogin />} />
           <Route path="/user-login" element={<UserLogin />} />
           <Route path="/user-sign" element={<UserSign />} />
@@ -73,6 +74,7 @@ function App() {
           <Route path="/admin-forgot-pass" element={<AdminForgotPass />} />
           <Route path="/user-forgot-pass" element={<UserForgotPass />} />
           <Route path="/admin-homepage" element={<AdminHomePage />} />
+          <Route path="/admin-homepage/manage-products" element={<ManageProducts />} />
         </Routes>
       </BrowserRouter>
       <ToastContainer theme="dark" />

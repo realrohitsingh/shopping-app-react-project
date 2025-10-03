@@ -12,7 +12,6 @@ import {
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-
 function AdminHomePage() {
   const navigate = useNavigate();
   const [adminData, setAdminData] = useState(null);
@@ -31,6 +30,10 @@ function AdminHomePage() {
     localStorage.removeItem("loggedInAdmin");
     toast.success("Logged out successfully");
     navigate("/admin-login");
+  };
+
+  const handleManageProducts = () => {
+    navigate("/admin-homepage/manage-products");
   };
 
   const stats = [
@@ -70,7 +73,8 @@ function AdminHomePage() {
       label: "Manage Products",
       desc: "Add, edit, or remove products",
       iconBg: "bg-gradient-to-br from-primary/20 to-purple-600/20 border-primary/30",
-      iconColor: "text-primary"
+      iconColor: "text-primary",
+      onClick: handleManageProducts
     },
     {
       icon: FaShoppingCart,
@@ -94,6 +98,7 @@ function AdminHomePage() {
       iconColor: "text-primary"
     },
   ];
+
 
   return (
     <div className="min-h-screen font-sans p-4 md:p-8">
@@ -170,7 +175,8 @@ function AdminHomePage() {
             <div
               key={index}
               className="feature-card cursor-pointer group animate-[slideUp_0.8s_ease-out] relative overflow-hidden"
-              style={{ animationDelay: `${index * 0.1}s` }}>
+              style={{ animationDelay: `${index * 0.1}s` }}
+              onClick={action.onClick || undefined}>
               <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
               <div className="relative flex items-start gap-5">

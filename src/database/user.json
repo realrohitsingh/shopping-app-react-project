@@ -26,6 +26,15 @@
       "re_password": "123456",
       "phone": "657657657658",
       "age": "65"
+    },
+    {
+      "id": "fd89",
+      "U_name": "user",
+      "email": "user@gmail.com",
+      "password": "user",
+      "re_password": "user",
+      "phone": "7612831728",
+      "age": "25"
     }
   ]
 }

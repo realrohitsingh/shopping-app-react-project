@@ -1,0 +1,139 @@
+{
+  "products": [
+    {
+      "name": "Iphone 17 Pro",
+      "price": 1099.99,
+      "description": "The iPhone 17 Pro and iPhone 17 Pro Max are available in a new vibrant color called Cosmic Orange, which has been confirmed by multiple sources including Apple's official website and product listings.",
+      "category": "Electronics",
+      "stock": 10,
+      "image": "https://imgs.search.brave.com/QxTSNSnwje-E3RPRTyv9b9PHzwEkxUbOl45eCQcsOC4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/YXBwbGUuY29tL25l/d3Nyb29tL2ltYWdl/cy8yMDI1LzA5L2Fw/cGxlLXVudmVpbHMt/aXBob25lLTE3LXBy/by1hbmQtaXBob25l/LTE3LXByby1tYXgv/YXJ0aWNsZS9BcHBs/ZS1pUGhvbmUtMTct/UHJvLWNvc21pYy1v/cmFuZ2UtMjUwOTA5/X2lubGluZS5qcGcu/bGFyZ2UuanBn",
+      "id": "4b60"
+    },
+    {
+      "id": "c425",
+      "name": "Samsung s25 Ultra",
+      "price": 1918.99,
+      "description": "The Samsung Galaxy S25 Ultra is a high-end smartphone announced on January 22, 2025, and released on February 7, 2025, featuring a 6.9-inch Dynamic LTPO AMOLED 2X display with a QHD+ resolution of 3120 x 1440 pixels, a 120 Hz refresh rate, and a peak brightness of 2600 nits.\n It is powered by the Qualcomm Snapdragon 8 Elite for Galaxy chipset, which includes a 3 nm process, 2x 4.47 GHz Oryon (Phoenix L) and 6x 3.53 GHz Oryon (Phoenix M) CPU cores, and an Adreno 830 GPU.",
+      "category": "Electronics",
+      "stock": 10,
+      "image": "https://imgs.search.brave.com/3WjihHJRjU2DWkPjxm9Vm0fpdKUkXhjO9z4SydApubI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/bWlzdGVybW9iaWxl/LmNvbS5zZy93cC1j/b250ZW50L3VwbG9h/ZHMvMjAyNS8wMS9T/YW1zdW5nLVMyNS1V/bHRyYS1UaXRhbml1/bS1XaGl0ZXNpbHZl/ci0xLnBuZw"
+    },
+    {
+      "name": "MacBook Pro M4",
+      "price": 2499.99,
+      "description": "The latest MacBook Pro with M4 chip delivers exceptional performance for professionals. Featuring a stunning Liquid Retina XDR display, up to 22 hours of battery life, and advanced thermal design for sustained performance.",
+      "category": "Electronics",
+      "stock": 15,
+      "image": "https://imgs.search.brave.com/oVYWDs1A9KBqYWAGjRJY7xbeRcYAu26-jOcLRes0dps/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbnZl/bnRzdG9yZS5pbi93/cC1jb250ZW50L3Vw/bG9hZHMvMjAyNC8x/MS8yLTMwMHgzMDAu/d2VicA",
+      "id": "e001"
+    },
+    {
+      "name": "Sony WH-1000XM5 Headphones",
+      "price": 399.99,
+      "description": "Industry-leading noise canceling with Dual Noise Sensor technology. Next-level music with Edge-AI, co-developed with Sony Music Studios Tokyo. Up to 30-hour battery life with quick charge.",
+      "category": "Electronics",
+      "stock": 25,
+      "image": "https://imgs.search.brave.com/LxYQFyRdE4uzVs_XRiV-E9dkVzphz4nWj9dWPh1fEAo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/bW9zLmNtcy5mdXR1/cmVjZG4ubmV0L3NN/Y3kycU1YcWN1cVZm/emFQcWViQzYuanBn",
+      "id": "e002"
+    },
+    {
+      "name": "iPad Air M2",
+      "price": 599.99,
+      "description": "The new iPad Air is supercharged by the M2 chip. With a 10.9-inch Liquid Retina display, Touch ID, and all-day battery life. Perfect for work, creativity, and entertainment.",
+      "category": "Electronics",
+      "stock": 20,
+      "image": "https://imgs.search.brave.com/Mugw86gD8rsQQ6AIPUu6-8xvZq6881U6XYj-nqckCz0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/aXN0b3JlLmNvLnph/L21lZGlhL2NhdGFs/b2cvcHJvZHVjdC9j/YWNoZS83Y2JmZDRi/Zjk3NjFiMDY2ZjEx/OWU5NWFmMTdlNjdj/NS9pL3AvaXBhZF9h/aXJfMTFfbTJfY2Vs/bHVsYXJfc3BhY2Vf/Z3JheV9wZHBfaW1h/Z2VfcG9zaXRpb25f/MWJfX3d3ZW5fMV8x/XzFfMi5wbmc",
+      "id": "e003"
+    },
+    {
+      "name": "Samsung 55\" QLED 4K TV",
+      "price": 899.99,
+      "description": "Experience stunning 4K UHD picture quality with Quantum Dot technology. Smart TV with built-in apps, voice control, and seamless connectivity. Perfect for gaming and streaming.",
+      "category": "Electronics",
+      "stock": 12,
+      "image": "https://imgs.search.brave.com/4kjJ8IhPuI5bvQ30Cz8EyCljGahq_ahzPRFj_G_q6wE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWdz/LmNhc2FzYmFoaWEu/Y29tLmJyLzE1NzI1/NjcyOTkvMXhnLmpw/Zw",
+      "id": "e004"
+    },
+    {
+      "name": "AirPods Pro 2nd Gen",
+      "price": 249.99,
+      "description": "AirPods Pro feature Active Noise Cancellation for immersive sound. Transparency mode for hearing and connecting with the world around you. Up to 30 hours total listening time.",
+      "category": "Electronics",
+      "stock": 30,
+      "image": "https://imgs.search.brave.com/KM_AhYzTGuatMJJTCXNbkTIf5tulAj9zFQEuKyhtBDM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/YXBwbGUuY29tL25l/d3Nyb29tL2ltYWdl/cy9wcm9kdWN0L2Fp/cnBvZHMvc3RhbmRh/cmQvQXBwbGUtQWly/UG9kcy1Qcm8tMm5k/LWdlbi1oZXJvLTIy/MDkwN19iaWcuanBn/LmxhcmdlLmpwZw",
+      "id": "e005"
+    },
+    {
+      "name": "Classic White Dress Shirt",
+      "price": 89.99,
+      "description": "Premium cotton dress shirt with a classic fit. Perfect for business meetings, formal events, or everyday professional wear. Features mother-of-pearl buttons and French seams.",
+      "category": "Men's Clothing",
+      "stock": 50,
+      "image": "https://imgs.search.brave.com/KQU0sRuS3Hbi3dw9bmSl3hahaGbIu_DP3y3TrWEU__Q/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzhhL2Iw/L2FhLzhhYjBhYTY3/MzI0NjAxOTg4NGM0/MjMwN2Q1NDVmNjAw/LmpwZw",
+      "id": "c001"
+    },
+    {
+      "name": "Denim Jacket",
+      "price": 129.99,
+      "description": "Classic blue denim jacket with a modern slim fit. Made from 100% cotton denim with vintage wash. Perfect for layering or wearing on its own for a casual, stylish look.",
+      "category": "Men's Clothing",
+      "stock": 35,
+      "image": "https://imgs.search.brave.com/dbq0QWm7cLv715RJLHNp8kRHQVdcR7gI1Kp3NegQvRk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/YXBldG9nZW50bGVt/YW4uY29tL3dwLWNv/bnRlbnQvdXBsb2Fk/cy8yMDE5LzAzL3dl/YXItZGVuaW0tamFj/a2V0LW1lbi0xNS5q/cGc",
+      "id": "c002"
+    },
+    {
+      "name": "Navy Blue Blazer",
+      "price": 199.99,
+      "description": "Elegant navy blue blazer crafted from premium wool blend. Features a modern tailored fit, notched lapels, and two-button closure. Versatile piece perfect for business casual or formal occasions.",
+      "category": "Men's Clothing",
+      "stock": 20,
+      "image": "https://imgs.search.brave.com/PjK5_xMFoJyNZY-96bKYPb4-J6OUHNssgd_43l8TQOw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/c2hvcGlmeS5jb20v/cy9maWxlcy8xLzA2/MzkvMTIzNy84NjAy/L2ZpbGVzL05hdnlf/Qmx1ZV9ibGF6ZXJf/Zm9yX21lbl8tX2Zy/ZW5jaGNyb3duLmlu/XzQ4MHg0ODAud2Vi/cD92PTE3MjI0Mjk4/NTE",
+      "id": "c003"
+    },
+    {
+      "name": "Black Leather Jacket",
+      "price": 299.99,
+      "description": "Premium black leather jacket made from genuine cowhide leather. Features a classic motorcycle style with zipper closure, multiple pockets, and a comfortable fit. Timeless piece for any wardrobe.",
+      "category": "Men's Clothing",
+      "stock": 15,
+      "image": "https://imgs.search.brave.com/PcMzp574WIN2V0UJjZ43DdjH1Zkg-0BHHdtY6xCHjRc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9idWZm/YWxvamFja3Nvbi5j/b20vY2RuL3Nob3Av/cHJvZHVjdHMvZHJp/Z2dzLWxlYXRoZXIt/amFja2V0LWJsYWNr/LTYyXzkwMHg5MDBf/Y3JvcF9jZW50ZXIu/anBnP3Y9MTY2Njk2/ODE5NA",
+      "id": "c004"
+    },
+    {
+      "name": "Casual Polo Shirt",
+      "price": 49.99,
+      "description": "Comfortable polo shirt made from breathable cotton blend. Available in multiple colors with a classic fit. Perfect for casual outings, sports, or weekend wear.",
+      "category": "Men's Clothing",
+      "stock": 60,
+      "image": "https://imgs.search.brave.com/dfU-DKOVWJW5j2rRVAI6RHFzuM3F-RnkRVX_8bixlxk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMtbmEuc3NsLWlt/YWdlcy1hbWF6b24u/Y29tL2ltYWdlcy9J/Lzgxem1Ea3g0TzhM/LmpwZw",
+      "id": "c005"
+    },
+    {
+      "name": "Dark Wash Jeans",
+      "price": 79.99,
+      "description": "Premium dark wash jeans with a slim straight fit. Made from 98% cotton and 2% elastane for comfort and stretch. Classic five-pocket design with a mid-rise waist.",
+      "category": "Men's Clothing",
+      "stock": 40,
+      "image": "https://imgs.search.brave.com/DnGwKprgjeA77v7YqTawy-AlxfQ7aPhu6a7NAZIk9q0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/amNyZXcuY29tL3M3/LWltZy1mYWNhZGUv/Q04wMDRfRE05NzQ3/X20_aGVpPTY0MCZj/cm9wPTAsMCw1MTIs/MA",
+      "id": "c006"
+    },
+    {
+      "name": "Wool Blend Sweater",
+      "price": 119.99,
+      "description": "Cozy wool blend sweater perfect for fall and winter. Features a crew neck design, ribbed cuffs and hem, and a comfortable relaxed fit. Available in classic colors.",
+      "category": "Men's Clothing",
+      "stock": 25,
+      "image": "https://imgs.search.brave.com/DLJz0jAN877DHgh9-9Ejc2MZPtR9IJz4MmS-OwZwip8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/amNyZXcuY29tL3M3/LWltZy1mYWNhZGUv/Q0w0NDBfU1U1ODMx/X20_aGVpPTY0MCZj/cm9wPTAsMCw1MTIs/MA",
+      "id": "c007"
+    },
+    {
+      "name": "Athletic Shorts",
+      "price": 39.99,
+      "description": "Performance athletic shorts made from moisture-wicking fabric. Features an elastic waistband, side pockets, and a comfortable fit. Perfect for workouts, running, or casual wear.",
+      "category": "Men's Clothing",
+      "stock": 45,
+      "image": "https://imgs.search.brave.com/hpENRNGJU3c0aPMp-Qgblv6mX2bHcg1_iUBlL-MEI4M/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMtbmEuc3NsLWlt/YWdlcy1hbWF6b24u/Y29tL2ltYWdlcy9J/LzYxcGE3cTcwdlBM/LmpwZw",
+      "id": "c008"
+    }
+  ]
+}
