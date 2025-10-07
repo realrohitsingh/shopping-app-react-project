@@ -43,7 +43,7 @@ function AdminHomePage() {
   const fetchProductCount = async () => {
     try {
       const response = await axios.get("http://localhost:1002/products");
-      setProductCount(response.data.length);
+      setProductCount((response.data.products || []).length);
     } catch (error) {
       console.error("Error fetching product count:", error);
       setProductCount(0);
@@ -60,25 +60,37 @@ function AdminHomePage() {
     navigate("/admin-homepage/manage-products");
   };
 
+  const handleViewOrders = () => {
+    navigate("/admin-homepage/view-orders");
+  };
+
+  const handleCustomerManagement = () => {
+    navigate("/admin-homepage/customer-management");
+  };
+
+  const handleAnalytics = () => {
+    navigate("/admin-homepage/analytics");
+  };
+
   const stats = [
     {
       icon: FaShoppingCart,
       label: "Total Orders",
-      value: "No Orders",
+      value: "45",
       iconBg: "bg-gradient-to-br from-primary/20 to-purple-600/20 border-primary/30",
       iconColor: "text-primary"
     },
     {
       icon: FaDollarSign,
       label: "Revenue",
-      value: "No Revenue",
+      value: "$22789.99",
       iconBg: "bg-gradient-to-br from-accent/20 to-cyan-600/20 border-accent/30",
       iconColor: "text-accent"
     },
     {
       icon: FaUsers,
       label: "Customers",
-      value: "N/A",
+      value: "10",
       iconBg: "bg-gradient-to-br from-success/20 to-green-600/20 border-success/30",
       iconColor: "text-success"
     },
@@ -105,21 +117,24 @@ function AdminHomePage() {
       label: "View Orders",
       desc: "Track and fulfill orders",
       iconBg: "bg-gradient-to-br from-accent/20 to-cyan-600/20 border-accent/30",
-      iconColor: "text-accent"
+      iconColor: "text-accent",
+      onClick: handleViewOrders
     },
     {
       icon: FaUsers,
       label: "Customer Management",
       desc: "View and manage customers",
       iconBg: "bg-gradient-to-br from-success/20 to-green-600/20 border-success/30",
-      iconColor: "text-success"
+      iconColor: "text-success",
+      onClick: handleCustomerManagement
     },
     {
       icon: FaChartLine,
       label: "Analytics",
       desc: "View sales and statistics",
       iconBg: "bg-gradient-to-br from-primary/20 to-purple-600/20 border-primary/30",
-      iconColor: "text-primary"
+      iconColor: "text-primary",
+      onClick: handleAnalytics
     },
   ];
 
@@ -227,7 +242,7 @@ function AdminHomePage() {
           ))}
         </div>
       </div>
-      <div className="max-w-7xl mx-auto mt-16 text-center">
+      {/* <div className="max-w-7xl mx-auto mt-16 text-center">
         <div className="glass-panel p-8 animate-[fadeIn_1s_ease-out] relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5" />
           <div className="relative">
@@ -240,7 +255,7 @@ function AdminHomePage() {
             </p>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

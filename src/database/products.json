@@ -109,15 +109,6 @@
       "id": "c005"
     },
     {
-      "name": "Dark Wash Jeans",
-      "price": 79.99,
-      "description": "Premium dark wash jeans with a slim straight fit. Made from 98% cotton and 2% elastane for comfort and stretch. Classic five-pocket design with a mid-rise waist.",
-      "category": "Men's Clothing",
-      "stock": 40,
-      "image": "https://imgs.search.brave.com/DnGwKprgjeA77v7YqTawy-AlxfQ7aPhu6a7NAZIk9q0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/amNyZXcuY29tL3M3/LWltZy1mYWNhZGUv/Q04wMDRfRE05NzQ3/X20_aGVpPTY0MCZj/cm9wPTAsMCw1MTIs/MA",
-      "id": "c006"
-    },
-    {
       "name": "Wool Blend Sweater",
       "price": 119.99,
       "description": "Cozy wool blend sweater perfect for fall and winter. Features a crew neck design, ribbed cuffs and hem, and a comfortable relaxed fit. Available in classic colors.",
@@ -125,15 +116,6 @@
       "stock": 25,
       "image": "https://imgs.search.brave.com/DLJz0jAN877DHgh9-9Ejc2MZPtR9IJz4MmS-OwZwip8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/amNyZXcuY29tL3M3/LWltZy1mYWNhZGUv/Q0w0NDBfU1U1ODMx/X20_aGVpPTY0MCZj/cm9wPTAsMCw1MTIs/MA",
       "id": "c007"
-    },
-    {
-      "name": "Athletic Shorts",
-      "price": 39.99,
-      "description": "Performance athletic shorts made from moisture-wicking fabric. Features an elastic waistband, side pockets, and a comfortable fit. Perfect for workouts, running, or casual wear.",
-      "category": "Men's Clothing",
-      "stock": 45,
-      "image": "https://imgs.search.brave.com/hpENRNGJU3c0aPMp-Qgblv6mX2bHcg1_iUBlL-MEI4M/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMtbmEuc3NsLWlt/YWdlcy1hbWF6b24u/Y29tL2ltYWdlcy9J/LzYxcGE3cTcwdlBM/LmpwZw",
-      "id": "c008"
     },
     {
       "id": "beb4",

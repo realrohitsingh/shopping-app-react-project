@@ -5,12 +5,15 @@ import AdminForgotPass from "./components/AdminForgotPass";
 import AdminHomePage from "./components/AdminHomePage";
 import AdminLogin from "./components/AdminLogin";
 import AdminSign from "./components/AdminSign";
+import Analytics from "./components/Analytics";
+import CustomerManagement from "./components/CustomerManagement";
 import ErrorPage from "./components/ErrorPage";
 import LandingPage from "./components/LandingPage";
 import ManageProducts from "./components/ManageProducts";
 import UserForgotPass from "./components/UserForgotPass";
 import UserLogin from "./components/UserLogin";
 import UserSign from "./components/UserSign";
+import ViewOrders from "./components/ViewOrders";
 
 function App() {
   return (
@@ -75,6 +78,9 @@ function App() {
           <Route path="/user-forgot-pass" element={<UserForgotPass />} />
           <Route path="/admin-homepage" element={<AdminHomePage />} />
           <Route path="/admin-homepage/manage-products" element={<ManageProducts />} />
+          <Route path="/admin-homepage/view-orders" element={<ViewOrders />} />
+          <Route path="/admin-homepage/customer-management" element={<CustomerManagement />} />
+          <Route path="/admin-homepage/analytics" element={<Analytics />} />
         </Routes>
       </BrowserRouter>
       <ToastContainer theme="dark" />
