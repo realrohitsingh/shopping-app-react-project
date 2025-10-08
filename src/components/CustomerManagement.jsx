@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import {
     FaArrowLeft,
@@ -14,6 +13,7 @@ import {
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import userData from '../database/user.json';
 
 function CustomerManagement() {
     const navigate = useNavigate();
@@ -33,14 +33,13 @@ function CustomerManagement() {
         fetchCustomers();
     }, [navigate]);
 
-    const fetchCustomers = async () => {
+    const fetchCustomers = () => {
         try {
             setLoading(true);
-            const response = await axios.get("http://localhost:1002/users");
-            setCustomers(response.data.user || []);
+            setCustomers(userData.user || []);
         } catch (error) {
-            console.error("Error fetching customers:", error);
-            toast.error("Failed to fetch customers");
+            console.error("Error loading customers:", error);
+            toast.error("Failed to load customers");
         } finally {
             setLoading(false);
         }
@@ -202,7 +201,7 @@ function CustomerManagement() {
 
                                     <button
                                         onClick={() => handleViewCustomer(customer)}
-                                        className="btn-secondary group w-full"
+                                        className="w-full btn-primary group cursor-pointer hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 mt-auto"
                                     >
                                         <FaEye className="text-sm group-hover:scale-110 transition-transform" />
                                         <span>View Details</span>

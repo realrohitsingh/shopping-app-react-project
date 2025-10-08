@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import {
     FaArrowDown,
@@ -14,6 +13,8 @@ import {
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import productsData from '../database/products.json';
+import userData from '../database/user.json';
 
 function Analytics() {
     const navigate = useNavigate();
@@ -41,18 +42,24 @@ function Analytics() {
         fetchAnalyticsData();
     }, [navigate]);
 
-    const fetchAnalyticsData = async () => {
+    const fetchAnalyticsData = () => {
         try {
             setLoading(true);
 
-            // Fetch products and users data
-            const [productsResponse, usersResponse] = await Promise.all([
-                axios.get("http://localhost:1002/products"),
-                axios.get("http://localhost:1002/users")
-            ]);
+            // Get data from local JSON files
+            const products = productsData.products || [];
+            const users = userData.user || [];
 
-            const products = productsResponse.data.products || [];
-            const users = usersResponse.data.user || [];
+            // Calculate real metrics from JSON data
+            const totalProducts = products.length;
+            const totalCustomers = users.length;
+
+            // Calculate average product price
+            const totalProductValue = products.reduce((sum, product) => sum + (product.price || 0), 0);
+            const averageProductPrice = totalProductValue / totalProducts || 0;
+
+            // Calculate inventory value (total value of all products)
+            const inventoryValue = totalProductValue;
 
             // Calculate category distribution
             const categoryCount = {};
@@ -66,17 +73,32 @@ function Analytics() {
                 .sort((a, b) => b.count - a.count)
                 .slice(0, 5);
 
-            // Mock analytics data (in a real app, this would come from actual sales/order data)
-            const mockData = {
+            // Calculate age distribution for customers
+            const ageGroups = {
+                '18-25': 0,
+                '26-35': 0,
+                '36-45': 0,
+                '46-55': 0,
+                '55+': 0
+            };
+
+            users.forEach(user => {
+                const age = parseInt(user.age) || 0;
+                if (age >= 18 && age <= 25) ageGroups['18-25']++;
+                else if (age >= 26 && age <= 35) ageGroups['26-35']++;
+                else if (age >= 36 && age <= 45) ageGroups['36-45']++;
+                else if (age >= 46 && age <= 55) ageGroups['46-55']++;
+                else if (age > 55) ageGroups['55+']++;
+            });
+
+            // Mock data for sales/orders (since we don't have real sales data)
+            const mockSalesData = {
                 totalRevenue: 22789.99,
                 totalOrders: 45,
-                totalCustomers: users.length,
-                totalProducts: products.length,
                 revenueGrowth: 12.5,
                 orderGrowth: 8.3,
                 customerGrowth: 15.2,
                 productGrowth: 5.7,
-                topCategories,
                 recentActivity: [
                     { type: 'order', description: 'New order #ORD001 received', time: '2 hours ago', amount: 1349.98 },
                     { type: 'customer', description: 'New customer registered', time: '4 hours ago', amount: null },
@@ -86,10 +108,28 @@ function Analytics() {
                 ]
             };
 
-            setAnalyticsData(mockData);
+            // Combine real and mock data
+            const analyticsData = {
+                totalRevenue: mockSalesData.totalRevenue,
+                totalOrders: mockSalesData.totalOrders,
+                totalCustomers: totalCustomers,
+                totalProducts: totalProducts,
+                revenueGrowth: mockSalesData.revenueGrowth,
+                orderGrowth: mockSalesData.orderGrowth,
+                customerGrowth: mockSalesData.customerGrowth,
+                productGrowth: mockSalesData.productGrowth,
+                topCategories,
+                recentActivity: mockSalesData.recentActivity,
+                // Additional real metrics
+                averageProductPrice,
+                inventoryValue,
+                ageGroups
+            };
+
+            setAnalyticsData(analyticsData);
         } catch (error) {
-            console.error("Error fetching analytics data:", error);
-            toast.error("Failed to fetch analytics data");
+            console.error("Error loading analytics data:", error);
+            toast.error("Failed to load analytics data");
         } finally {
             setLoading(false);
         }
@@ -350,7 +390,7 @@ function Analytics() {
                         </div>
                         <h3 className="text-lg font-bold text-white mb-2">Inventory Value</h3>
                         <p className="text-3xl font-extrabold text-success">
-                            ${(analyticsData.totalProducts * 150).toLocaleString()}
+                            ${analyticsData.inventoryValue.toLocaleString()}
                         </p>
                     </div>
                 </div>

@@ -43,7 +43,7 @@ function AdminHomePage() {
   const fetchProductCount = async () => {
     try {
       const response = await axios.get("http://localhost:1002/products");
-      setProductCount((response.data.products || []).length);
+      setProductCount((response.data || []).length);
     } catch (error) {
       console.error("Error fetching product count:", error);
       setProductCount(0);

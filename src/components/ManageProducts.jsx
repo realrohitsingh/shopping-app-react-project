@@ -51,7 +51,9 @@ function ManageProducts() {
         try {
             setLoading(true);
             const response = await axios.get("http://localhost:1002/products");
-            setProducts(response.data.products || []);
+            setProducts(response.data || []);
+            // Update localStorage with current product count
+            localStorage.setItem('productCount', (response.data || []).length.toString());
         } catch (error) {
             console.error("Error fetching products:", error);
             toast.error("Failed to fetch products");
