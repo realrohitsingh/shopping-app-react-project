@@ -33,85 +33,33 @@ function ViewOrders() {
   const fetchOrders = async () => {
     try {
       setLoading(true);
-      // Check if we have saved orders in localStorage
-      const savedOrders = localStorage.getItem("orders");
+      const savedOrders = localStorage.getItem("userOrders");
 
       if (savedOrders) {
-        // Use saved orders from localStorage
-        setOrders(JSON.parse(savedOrders));
+        const userOrders = JSON.parse(savedOrders);
+        const transformedOrders = userOrders.map(order => ({
+          id: order.id.toString(),
+          customerName: order.orderData?.name || order.user?.U_name || "Unknown Customer",
+          customerEmail: order.orderData?.email || order.user?.email || "No email",
+          items: order.items.map(item => ({
+            productId: item.id,
+            name: item.name,
+            price: item.price,
+            quantity: item.quantity,
+          })),
+          totalAmount: order.total,
+          status: order.status || "pending",
+          orderDate: order.date,
+          shippingAddress: order.orderData?.address || "No address",
+        }));
+        setOrders(transformedOrders);
       } else {
-        // Create initial mock data and save to localStorage
-        const mockOrders = [
-          {
-            id: "ORD001",
-            customerName: "Rishav Burnwal",
-            customerEmail: "rishavburnwal123@email.com",
-            items: [
-              {
-                productId: "4b60",
-                name: "iPhone 17 Pro",
-                quantity: 1,
-                price: 1099.99,
-              },
-              {
-                productId: "e005",
-                name: "AirPods Pro 2nd Gen",
-                quantity: 1,
-                price: 249.99,
-              },
-            ],
-            totalAmount: 1349.98,
-            status: "pending",
-            orderDate: "2024-01-15T10:30:00Z",
-            shippingAddress: "123 Main St, New York, NY 10001",
-          },
-          {
-            id: "ORD002",
-            customerName: "Seema Kumari",
-            customerEmail: "seemakumari2512@email.com",
-            items: [
-              {
-                productId: "c001",
-                name: "Classic White Dress Shirt",
-                quantity: 2,
-                price: 89.99,
-              },
-              {
-                productId: "c006",
-                name: "Dark Wash Jeans",
-                quantity: 1,
-                price: 79.99,
-              },
-            ],
-            totalAmount: 259.97,
-            status: "shipped",
-            orderDate: "2024-01-14T14:20:00Z",
-            shippingAddress: "456 Oak Ave, Los Angeles, CA 90210",
-          },
-          {
-            id: "ORD003",
-            customerName: "Karishma Kumari",
-            customerEmail: "kriss.kumari123@email.com",
-            items: [
-              {
-                productId: "e002",
-                name: "Sony WH-1000XM5 Headphones",
-                quantity: 1,
-                price: 399.99,
-              },
-            ],
-            totalAmount: 399.99,
-            status: "delivered",
-            orderDate: "2024-01-13T09:15:00Z",
-            shippingAddress: "789 Pine St, Chicago, IL 60601",
-          },
-        ];
-        setOrders(mockOrders);
-        localStorage.setItem("orders", JSON.stringify(mockOrders));
+        setOrders([]);
       }
     } catch (error) {
       console.error("Error fetching orders:", error);
       toast.error("Failed to fetch orders");
+      setOrders([]);
     } finally {
       setLoading(false);
     }
@@ -121,15 +69,72 @@ function ViewOrders() {
     switch (status) {
       case "pending":
         return "text-yellow-400 bg-yellow-400/20 border-yellow-400/30";
+      case "approved":
+        return "text-green-400 bg-green-400/20 border-green-400/30";
+      case "rejected":
+        return "text-red-400 bg-red-400/20 border-red-400/30";
       case "shipped":
         return "text-blue-400 bg-blue-400/20 border-blue-400/30";
       case "delivered":
-        return "text-green-400 bg-green-400/20 border-green-400/30";
+        return "text-emerald-400 bg-emerald-400/20 border-emerald-400/30";
       case "cancelled":
         return "text-red-400 bg-red-400/20 border-red-400/30";
       default:
         return "text-gray-400 bg-gray-400/20 border-gray-400/30";
     }
+  };
+
+  const updateOrderStatus = (orderId, newStatus) => {
+    const savedOrders = localStorage.getItem("userOrders");
+    if (savedOrders) {
+      const userOrders = JSON.parse(savedOrders);
+      const updatedOrders = userOrders.map(order =>
+        order.id.toString() === orderId
+          ? { ...order, status: newStatus }
+          : order
+      );
+      localStorage.setItem("userOrders", JSON.stringify(updatedOrders));
+
+      if (newStatus === "approved" || newStatus === "delivered") {
+        const orderToMove = userOrders.find(order => order.id.toString() === orderId);
+        if (orderToMove) {
+          const recentOrders = JSON.parse(localStorage.getItem("recentOrders") || "[]");
+          const existingOrderIndex = recentOrders.findIndex(order => order.id === orderToMove.id);
+
+          if (existingOrderIndex >= 0) {
+            recentOrders[existingOrderIndex] = { ...orderToMove, status: newStatus };
+          } else {
+            recentOrders.push({ ...orderToMove, status: newStatus });
+          }
+
+          localStorage.setItem("recentOrders", JSON.stringify(recentOrders));
+
+          window.dispatchEvent(new CustomEvent('orderUpdated'));
+        }
+      }
+
+      setOrders(prevOrders =>
+        prevOrders.map(order =>
+          order.id === orderId
+            ? { ...order, status: newStatus }
+            : order
+        )
+      );
+
+      toast.success(`Order ${newStatus} successfully!`);
+    }
+  };
+
+  const handleApproveOrder = (orderId) => {
+    updateOrderStatus(orderId, "approved");
+  };
+
+  const handleRejectOrder = (orderId) => {
+    updateOrderStatus(orderId, "rejected");
+  };
+
+  const handleDeliverOrder = (orderId) => {
+    updateOrderStatus(orderId, "delivered");
   };
 
   const getStatusIcon = (status) => {
@@ -339,13 +344,39 @@ function ViewOrders() {
                       </div>
                     </div>
 
-                    {/* Action Button */}
-                    <button
-                      onClick={() => handleViewOrder(order)}
-                      className="w-full btn-primary group cursor-pointer hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 mt-auto">
-                      <FaEye className="text-sm group-hover:scale-110 transition-transform" />
-                      <span>View Full Details</span>
-                    </button>
+                    {/* Action Buttons */}
+                    <div className="flex gap-2 mt-auto">
+                      {order.status === "pending" && (
+                        <>
+                          <button
+                            onClick={() => handleApproveOrder(order.id)}
+                            className="flex-1 btn-success group cursor-pointer hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-green-500/20">
+                            <FaCheckCircle className="text-sm group-hover:scale-110 transition-transform" />
+                            <span>Approve</span>
+                          </button>
+                          <button
+                            onClick={() => handleRejectOrder(order.id)}
+                            className="flex-1 btn-danger group cursor-pointer hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-red-500/20">
+                            <FaTimes className="text-sm group-hover:scale-110 transition-transform" />
+                            <span>Reject</span>
+                          </button>
+                        </>
+                      )}
+                      {order.status === "approved" && (
+                        <button
+                          onClick={() => handleDeliverOrder(order.id)}
+                          className="flex-1 btn-accent group cursor-pointer hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-accent/20">
+                          <FaBox className="text-sm group-hover:scale-110 transition-transform" />
+                          <span>Mark Delivered</span>
+                        </button>
+                      )}
+                      <button
+                        onClick={() => handleViewOrder(order)}
+                        className="flex-1 btn-primary group cursor-pointer hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-primary/20">
+                        <FaEye className="text-sm group-hover:scale-110 transition-transform" />
+                        <span>View Details</span>
+                      </button>
+                    </div>
                   </div>
                 );
               })}
@@ -493,11 +524,10 @@ function ViewOrders() {
                               handleUpdateOrderStatus(selectedOrder.id, status);
                               setShowOrderDetails(false);
                             }}
-                            className={`flex items-center gap-2 px-4 py-3 rounded-xl border-2 transition-all duration-300 cursor-pointer hover:scale-105 font-medium ${
-                              selectedOrder.status === status
-                                ? getStatusColor(status) + " shadow-lg"
-                                : "text-text/70 bg-card/50 border-border/30 hover:border-primary/40 hover:text-primary hover:bg-primary/10 hover:shadow-md"
-                            }`}>
+                            className={`flex items-center gap-2 px-4 py-3 rounded-xl border-2 transition-all duration-300 cursor-pointer hover:scale-105 font-medium ${selectedOrder.status === status
+                              ? getStatusColor(status) + " shadow-lg"
+                              : "text-text/70 bg-card/50 border-border/30 hover:border-primary/40 hover:text-primary hover:bg-primary/10 hover:shadow-md"
+                              }`}>
                             <StatusIcon className="text-sm hover:rotate-12 transition-transform duration-300" />
                             <span className="capitalize">{status}</span>
                           </button>

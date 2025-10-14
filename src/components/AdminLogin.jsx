@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { FaArrowLeft, FaLock, FaShieldAlt, FaSignInAlt, FaUser } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-// 1. REMOVED: "axios" is no longer needed for this component.
-// 2. ADDED: Import the admin data directly from your JSON file.
 import adminData from '../database/admin.json';
 
 function AdminLogin() {
@@ -27,12 +25,10 @@ function AdminLogin() {
   function val_login(e) {
     e.preventDefault();
 
-    // Check in JSON file first
     let adminUser = adminData.Admins.find(
       (user) => user.email === email || user.U_name === email
     );
 
-    // If not found in JSON, check in localStorage (registered admins)
     if (!adminUser) {
       const registeredAdmins = JSON.parse(localStorage.getItem('registeredAdmins') || '[]');
       adminUser = registeredAdmins.find(
@@ -44,7 +40,8 @@ function AdminLogin() {
       if (adminUser.password === pwd) {
         toast.success("Login Successful! Welcome Admin.");
         localStorage.setItem("loggedInAdmin", JSON.stringify(adminUser));
-        navigate("/admin-homepage");
+        navigate("/admin-otp");
+        localStorage.setItem("AdminOtp", Math.round(Math.random() * 10000));
 
         if (rememberMe) {
           localStorage.setItem("rememberedUser", email);
@@ -58,7 +55,6 @@ function AdminLogin() {
       toast.error("No admin found with that email or username.");
     }
 
-    // Clear the fields after attempting login
     setEmail("");
     setPwd("");
   }

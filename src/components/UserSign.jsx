@@ -11,7 +11,6 @@ import {
 } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-// 1. REMOVED: "axios" is no longer needed.
 
 function UserSign() {
   const navigate = useNavigate();
@@ -39,13 +38,11 @@ function UserSign() {
   function register_user(e) {
     e.preventDefault();
 
-    // Validate password match
     if (user.password !== user.re_password) {
       toast.error("Passwords do not match!");
       return;
     }
 
-    // Check if user already exists in localStorage
     const existingUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
     const userExists = existingUsers.find(
       existingUser => existingUser.email === user.email || existingUser.U_name === user.U_name
@@ -56,18 +53,15 @@ function UserSign() {
       return;
     }
 
-    // Create new user object (remove re_password field)
     const { re_password: _re_password, ...newUser } = user;
     const userWithId = {
       ...newUser,
-      id: `user_${Date.now()}`, // Generate unique ID
+      id: `user_${Date.now()}`,
       age: parseInt(newUser.age)
     };
 
-    // Add to localStorage
     existingUsers.push(userWithId);
     localStorage.setItem('registeredUsers', JSON.stringify(existingUsers));
-
     toast.success("User registration successful! You can now login.");
     navigate("/user-login");
   }

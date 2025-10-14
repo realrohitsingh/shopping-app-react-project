@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { FaArrowLeft, FaLock, FaShoppingBag, FaSignInAlt, FaUser } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-// 1. REMOVED: "axios" is no longer needed.
-// 2. ADDED: Import the user data directly from your JSON file.
 import userData from '../database/user.json';
 
 function UserLogin() {
@@ -27,12 +25,10 @@ function UserLogin() {
   function val_login(e) {
     e.preventDefault();
 
-    // Check in JSON file first
     let foundUser = userData.user.find(
       (user) => user.email === email || user.U_name === email
     );
 
-    // If not found in JSON, check in localStorage (registered users)
     if (!foundUser) {
       const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
       foundUser = registeredUsers.find(
@@ -44,15 +40,14 @@ function UserLogin() {
       if (foundUser.password === pwd) {
         toast.success("Login Successful! Welcome back.");
         localStorage.setItem("loggedInUser", JSON.stringify(foundUser));
+        localStorage.setItem("UserOtp", Math.round(Math.random() * 10000));
+        navigate("/user-otp", { replace: false });
 
         if (rememberMe) {
           localStorage.setItem("rememberedUser", email);
         } else {
           localStorage.removeItem("rememberedUser");
         }
-
-        // Navigate to user dashboard or home page
-        navigate("/");
       } else {
         toast.error("Invalid password.");
       }

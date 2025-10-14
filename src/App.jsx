@@ -10,8 +10,11 @@ import CustomerManagement from "./components/CustomerManagement";
 import ErrorPage from "./components/ErrorPage";
 import LandingPage from "./components/LandingPage";
 import ManageProducts from "./components/ManageProducts";
+import Otp from "./components/Otp";
 import UserForgotPass from "./components/UserForgotPass";
+import UserHomePage from "./components/UserHomePage";
 import UserLogin from "./components/UserLogin";
+import UserOtp from "./components/UserOtp";
 import UserSign from "./components/UserSign";
 import ViewOrders from "./components/ViewOrders";
 
@@ -81,6 +84,9 @@ function App() {
           <Route path="/admin-homepage/view-orders" element={<ViewOrders />} />
           <Route path="/admin-homepage/customer-management" element={<CustomerManagement />} />
           <Route path="/admin-homepage/analytics" element={<Analytics />} />
+          <Route path="/admin-otp" element={<Otp />} />
+          <Route path="/user-otp" element={<UserOtp />} />
+          <Route path="/user-homepage" element={<UserHomePage />} />
         </Routes>
       </BrowserRouter>
       <ToastContainer theme="dark" />

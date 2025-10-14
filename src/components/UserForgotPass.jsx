@@ -2,8 +2,6 @@ import { useState } from "react";
 import { FaArrowLeft, FaCheckCircle, FaEnvelope, FaKey, FaShoppingBag } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-// 1. REMOVED: "axios" is no longer needed.
-// 2. ADDED: Import the user data directly from your JSON file.
 import userData from '../database/user.json';
 
 function UserForgotPass() {
@@ -19,10 +17,8 @@ function UserForgotPass() {
       return;
     }
 
-    // Check in JSON file first
     let userAccount = userData.user.find((user) => user.email === email);
 
-    // If not found in JSON, check in localStorage (registered users)
     if (!userAccount) {
       const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
       userAccount = registeredUsers.find((user) => user.email === email);

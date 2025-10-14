@@ -13,30 +13,45 @@ import {
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import AccessDenied from './AccessDenied';
 function AdminHomePage() {
   const navigate = useNavigate();
+
+  // IMMEDIATE SECURITY CHECK - NO RENDERING IF NOT AUTHORIZED
+  const loggedInAdmin = localStorage.getItem("loggedInAdmin");
+
+  if (!loggedInAdmin) {
+    localStorage.removeItem("AdminOtp");
+    localStorage.removeItem("loggedInAdmin");
+    toast.error("Unauthorized access! Please login first.");
+    return <AccessDenied redirectTo="/admin-login" userType="admin" />;
+  }
+
   const [adminData, setAdminData] = useState(null);
   const [productCount, setProductCount] = useState(0);
+  const [totalOrders, setTotalOrders] = useState(0);
+  const [totalRevenue, setTotalRevenue] = useState(0);
+  const [totalCustomers, setTotalCustomers] = useState(0);
 
   useEffect(() => {
-    const loggedInAdmin = localStorage.getItem("loggedInAdmin");
-    if (loggedInAdmin) {
-      setAdminData(JSON.parse(loggedInAdmin));
-      fetchProductCount();
-    } else {
-      toast.error("Please login first");
-      navigate("/admin-login");
-    }
+    setAdminData(JSON.parse(loggedInAdmin));
+    fetchProductCount();
+    fetchOrdersData();
 
-    // Listen for product updates to refresh product count
     const handleProductUpdate = () => {
       fetchProductCount();
     };
 
+    const handleOrderUpdate = () => {
+      fetchOrdersData();
+    };
+
     window.addEventListener('productUpdated', handleProductUpdate);
+    window.addEventListener('orderUpdated', handleOrderUpdate);
 
     return () => {
       window.removeEventListener('productUpdated', handleProductUpdate);
+      window.removeEventListener('orderUpdated', handleOrderUpdate);
     };
   }, [navigate]);
 
@@ -47,6 +62,32 @@ function AdminHomePage() {
     } catch (error) {
       console.error("Error fetching product count:", error);
       setProductCount(0);
+    }
+  };
+
+  const fetchOrdersData = () => {
+    try {
+      const recentOrders = localStorage.getItem("recentOrders");
+      if (recentOrders) {
+        const orders = JSON.parse(recentOrders);
+
+        setTotalOrders(orders.length);
+
+        const revenue = orders.reduce((total, order) => total + order.total, 0);
+        setTotalRevenue(revenue);
+
+        const uniqueCustomers = new Set(orders.map(order => order.orderData?.name || order.user?.U_name)).size;
+        setTotalCustomers(uniqueCustomers);
+      } else {
+        setTotalOrders(0);
+        setTotalRevenue(0);
+        setTotalCustomers(0);
+      }
+    } catch (error) {
+      console.error("Error fetching orders data:", error);
+      setTotalOrders(0);
+      setTotalRevenue(0);
+      setTotalCustomers(0);
     }
   };
 
@@ -76,21 +117,21 @@ function AdminHomePage() {
     {
       icon: FaShoppingCart,
       label: "Total Orders",
-      value: "45",
+      value: totalOrders.toString(),
       iconBg: "bg-gradient-to-br from-primary/20 to-purple-600/20 border-primary/30",
       iconColor: "text-primary"
     },
     {
       icon: FaDollarSign,
       label: "Revenue",
-      value: "$22789.99",
+      value: `$${totalRevenue.toFixed(2)}`,
       iconBg: "bg-gradient-to-br from-accent/20 to-cyan-600/20 border-accent/30",
       iconColor: "text-accent"
     },
     {
       icon: FaUsers,
       label: "Customers",
-      value: "10",
+      value: totalCustomers.toString(),
       iconBg: "bg-gradient-to-br from-success/20 to-green-600/20 border-success/30",
       iconColor: "text-success"
     },
@@ -202,6 +243,58 @@ function AdminHomePage() {
           ))}
         </div>
       </div>
+
+      <div className="max-w-7xl mx-auto mb-10">
+        <div className="glass-panel p-8">
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-3">
+              <div className="relative">
+                <div className="absolute inset-0 bg-accent/20 rounded-xl blur-lg animate-pulse" />
+                <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-accent/30 to-cyan-600/30 border border-accent/50 flex items-center justify-center">
+                  <FaShoppingCart className="text-lg text-accent" />
+                </div>
+              </div>
+              <h2 className="text-2xl font-bold text-white">Recent Orders</h2>
+            </div>
+            <span className="text-text/60 text-sm">
+              {totalOrders} completed orders
+            </span>
+          </div>
+
+          {totalOrders === 0 ? (
+            <div className="text-center py-12">
+              <FaShoppingCart className="text-4xl text-text/30 mx-auto mb-4" />
+              <p className="text-text/60">No completed orders yet</p>
+              <p className="text-text/40 text-sm mt-2">Approved and delivered orders will appear here</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {JSON.parse(localStorage.getItem("recentOrders") || "[]")
+                .slice(-6)
+                .map((order, index) => (
+                  <div key={order.id} className="p-4 rounded-xl bg-card/30 border border-border/30">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-white font-semibold">#{order.id}</span>
+                      <span className={`px-2 py-1 rounded-lg text-xs font-medium ${order.status === 'delivered' ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40' :
+                        'bg-green-500/20 text-green-400 border border-green-500/40'
+                        }`}>
+                        {order.status}
+                      </span>
+                    </div>
+                    <div className="space-y-2">
+                      <p className="text-text/80 text-sm">{order.orderData?.name || order.user?.U_name || 'Customer'}</p>
+                      <p className="text-text/60 text-xs">
+                        {new Date(order.date).toLocaleDateString()}
+                      </p>
+                      <p className="text-accent font-bold">${order.total.toFixed(2)}</p>
+                    </div>
+                  </div>
+                ))}
+            </div>
+          )}
+        </div>
+      </div>
+
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center gap-3 mb-8 animate-[fadeIn_0.8s_ease-out]">
           <h2 className="text-3xl font-extrabold text-white">
